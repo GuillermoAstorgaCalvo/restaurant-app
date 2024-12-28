@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", // Compatibilidad moderna de JavaScript
+    "lib": [
+      "ES2022"
+    ], // No necesitas DOM en el backend
+    "module": "CommonJS", // El backend con Node.js utiliza CommonJS por defecto
+    "moduleResolution": "node",
+    "outDir": "dist", // Carpeta donde se colocará el código compilado
+    "rootDir": "src", // Define la raíz del proyecto para los archivos TypeScript
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true, // Evita revisar tipos de dependencias externas
+    "resolveJsonModule": true, // Permite importar archivos JSON
+    "allowSyntheticDefaultImports": true,
+    "incremental": true // Habilita compilaciones incrementales
+    ,
+    "allowJs": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "src/**/*",
+    ".next/types/**/*.ts"
+  ], // Solo incluye archivos en el directorio src
+  "exclude": [
+    "node_modules",
+    "dist"
+  ] // Excluye carpetas innecesarias
+}
