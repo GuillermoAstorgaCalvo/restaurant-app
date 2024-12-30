@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+/node_modules
 FRONTEND/node_modules
 BACKEND/node_modules
 FRONTEND/.pnp
@@ -20,6 +21,7 @@ FRONTEND/out/
 
 # production
 FRONTEND/build
+FRONTEND/dist/
 
 # misc
 FRONTEND/.DS_Store
