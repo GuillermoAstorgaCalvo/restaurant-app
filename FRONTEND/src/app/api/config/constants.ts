@@ -1,4 +1,4 @@
-export const API_BASE_URL = "/api";
+/* export const API_BASE_URL = "/api";
 
 export const API_ENDPOINTS = {
   AUTH: {
@@ -31,3 +31,4 @@ export const DEFAULT_API_CONFIG: RequestInit = {
   },
   credentials: "include",
 };
+ */
