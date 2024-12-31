@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", // Target modern JavaScript (compatible with Next.js 15)
+    "lib": ["dom", "dom.iterable", "esnext"], // Required for React and Next.js
+    "module": "esnext", // Use ESNext for module resolution
+    "moduleResolution": "bundler", // Required for Next.js 15 and Turbopack
+    "outDir": "dist", // Optional, but good practice if emitted
+    "esModuleInterop": true, // Allows using CommonJS modules
+    "strict": true, // Enforce strict type-checking
+    "skipLibCheck": true, // Skip checking types of node_modules
+    "resolveJsonModule": true, // Enable importing JSON files
+    "allowSyntheticDefaultImports": true, // Support synthetic default imports
+    "incremental": true, // Speed up subsequent builds
+    "allowJs": true, // Allow JS files in the project
+    "noEmit": true, // Prevent emitting files (Next.js handles this)
+    "isolatedModules": true, // Required for Next.js 15
+    "jsx": "preserve", // Preserve JSX as-is for Next.js
+    "baseUrl": ".", // Base directory for module resolution
+    "paths": {
+      "@/*": ["./src/*"] // Aliases for cleaner imports
+    },
+    "types": ["node"],
+    "plugins": [
+      {
+        "name": "next" // Required plugin for Next.js
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts", // Include Next.js environment types
+    "src/**/*", // Include all source files
+    ".next/types/**/*.ts", // Include Next.js type declarations
+    "scripts"
+  ],
+  "exclude": [
+    "node_modules", // Exclude external dependencies
+    ".next", // Exclude Next.js build output
+    "dist" // Exclude compiled output (if applicable)
+  ]
+}

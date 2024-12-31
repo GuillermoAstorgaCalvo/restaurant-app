@@ -1,0 +1,13 @@
+{
+  "name": "restaurant-app-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "docker:up": "docker-compose up",
+    "docker:build": "docker-compose build",
+    "docker:down": "docker-compose down",
+    "docker:start": "docker-compose up -d",
+    "docker:stop": "docker-compose stop",
+    "docker:restart": "docker-compose restart"
+  }
+}
