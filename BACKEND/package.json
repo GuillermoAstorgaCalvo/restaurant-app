@@ -12,7 +12,9 @@
     "docker:build": "docker-compose -f ../docker-compose.yml build backend",
     "docker:start": "docker-compose -f ../docker-compose.yml up -d backend",
     "docker:stop": "docker-compose -f ../docker-compose.yml stop backend",
-    "docker:remove": "docker-compose -f ../docker-compose.yml down backend"
+    "docker:remove": "docker-compose -f ../docker-compose.yml down backend",
+    "migrate": "NODE_OPTIONS='-r ts-node/register' npx sequelize-cli db:migrate",
+    "migrate:undo": "NODE_OPTIONS='-r ts-node/register' npx sequelize-cli db:migrate:undo"
   },
   "repository": {
     "type": "git",
@@ -26,7 +28,6 @@
   },
   "homepage": "https://github.com/GuillermoAstorgaCalvo/restaurant-app#readme",
   "dependencies": {
-    "@types/sequelize": "^4.28.20",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -41,7 +42,9 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.2",
+    "@types/sequelize": "^4.28.20",
     "nodemon": "^3.1.9",
+    "sequelize-cli": "^6.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }

@@ -18,20 +18,30 @@ export interface User {
   updatedAt: Date;
 }
 
+export type ReservationStatus =
+  | "pendiente"
+  | "confirmada"
+  | "finalizada"
+  | "cancelada";
+
 export interface Reservation {
-  id: string;
-  date: Date;
-  time: string;
+  id?: number;
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
   guests: number;
-  status: Status;
-  specialRequests?: string | null;
-  userId: string;
-  user: {
-    name: string;
-    email: string;
-  };
-  createdAt: Date;
-  updatedAt: Date;
+  status: ReservationStatus;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface CreateReservationData {
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
+  guests: number;
 }
 
 export interface MenuItem {

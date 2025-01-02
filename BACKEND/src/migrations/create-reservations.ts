@@ -1,27 +1,7 @@
-import { DataTypes, Model } from "sequelize";
-import sequelize from "../lib/sequelize";
+import { QueryInterface, DataTypes } from "sequelize";
 
-// Define the allowed status values
-export type ReservationStatus =
-  | "pendiente"
-  | "confirmada"
-  | "finalizada"
-  | "cancelada";
-
-export interface ReservationAttributes {
-  id?: number;
-  name: string;
-  email: string;
-  phone: string;
-  date: Date;
-  guests: number;
-  status: ReservationStatus;
-}
-
-export class Reservation extends Model<ReservationAttributes> {}
-
-Reservation.init(
-  {
+export async function up(queryInterface: QueryInterface): Promise<void> {
+  await queryInterface.createTable("reservations", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -57,12 +37,19 @@ Reservation.init(
       allowNull: false,
       defaultValue: "pendiente",
     },
-  },
-  {
-    sequelize,
-    tableName: "reservations",
-    timestamps: true,
-  }
-);
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+  });
+}
 
-export default Reservation;
+export async function down(queryInterface: QueryInterface): Promise<void> {
+  await queryInterface.dropTable("reservations");
+}

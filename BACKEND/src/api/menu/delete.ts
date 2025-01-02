@@ -1,13 +1,14 @@
-import { Request, Response } from "express";
-import Menu from "../../models/menu";
+import { RequestHandler } from "express";
+import MenuItem from "../../models/menu";
 
-export const deleteMenuItem = async (req: Request, res: Response) => {
+export const deleteMenuItem: RequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const menuItem = await Menu.findByPk(id);
+    const menuItem = await MenuItem.findByPk(id);
     if (!menuItem) {
-      return res.status(404).json({ error: "Menu item not found." });
+      res.status(404).json({ error: "Menu item not found." });
+      return;
     }
 
     await menuItem.destroy();

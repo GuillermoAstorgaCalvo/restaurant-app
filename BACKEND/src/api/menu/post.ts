@@ -1,13 +1,13 @@
-import { Request, Response } from "express";
+import { RequestHandler } from "express";
 import MenuItem from "../../models/menu";
 
-export const createMenuItem = async (req: Request, res: Response) => {
+export const createMenuItem: RequestHandler = async (req, res) => {
   try {
     const { name, description, price, imageUrl, category } = req.body;
 
-    // Ensure category is passed in the request body
     if (!category) {
-      return res.status(400).json({ error: "Category is required." });
+      res.status(400).json({ error: "Category is required." });
+      return;
     }
 
     const menuItem = await MenuItem.create({
@@ -15,7 +15,7 @@ export const createMenuItem = async (req: Request, res: Response) => {
       description,
       price,
       imageUrl,
-      category, // Ensure this is included
+      category,
     });
 
     res.status(201).json(menuItem);

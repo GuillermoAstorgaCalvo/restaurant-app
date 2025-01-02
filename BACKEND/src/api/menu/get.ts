@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
-import Menu from "../../models/menu";
+import { RequestHandler } from "express";
+import MenuItem from "../../models/menu";
 
-export const getMenuItems = async (req: Request, res: Response) => {
+export const getMenuItems: RequestHandler = async (req, res) => {
   try {
-    const menuItems = await Menu.findAll();
+    const menuItems = await MenuItem.findAll();
     res.status(200).json(menuItems);
   } catch (error) {
     console.error("Error fetching menu items:", error);

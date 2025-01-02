@@ -9,7 +9,11 @@ import {
   BUSINESS_HOURS,
   SOCIAL_LINKS,
 } from "@/app/lib/constants";
-import { FacebookIcon, InstagramIcon, TwitterIcon } from "@/app/components/ui";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  TwitterIcon,
+} from "@/app/components/ui/social-icons";
 
 const socialLinks = [
   { name: "Facebook", href: SOCIAL_LINKS.facebook, Icon: FacebookIcon },
