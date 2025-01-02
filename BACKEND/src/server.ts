@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import menuRouter from "./api/menu";
+import reservationRouter from "./api/reservations";
 
 dotenv.config();
 
@@ -20,7 +21,8 @@ app.get("/", (req, res) => {
 });
 
 // API Routes
-app.use("/api/menu", menuRouter); // Register the menu API routes
+app.use("/api/menu", menuRouter);
+app.use("/api/reservations", reservationRouter);
 
 // Error Handling Middleware
 app.use(

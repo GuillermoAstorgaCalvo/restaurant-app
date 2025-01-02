@@ -1,9 +1,8 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../lib/sequelize";
 
-// Define the attributes for the MenuItem model
 export interface MenuItemAttributes {
-  id?: number; // Optional because Sequelize auto-generates it
+  id?: number;
   name: string;
   description: string;
   price: number;
@@ -11,17 +10,8 @@ export interface MenuItemAttributes {
   category: string;
 }
 
-// Define the MenuItem model class
-class MenuItem extends Model<MenuItemAttributes> implements MenuItemAttributes {
-  public id!: number;
-  public name!: string;
-  public description!: string;
-  public price!: number;
-  public imageUrl!: string;
-  public category!: string;
-}
+export class MenuItem extends Model<MenuItemAttributes> {}
 
-// Initialize the MenuItem model
 MenuItem.init(
   {
     id: {
@@ -51,11 +41,10 @@ MenuItem.init(
     },
   },
   {
-    sequelize, // Pass the Sequelize instance
-    tableName: "menus", // Specify the table name
-    timestamps: true, // Automatically add `createdAt` and `updatedAt` fields
+    sequelize,
+    tableName: "menus",
+    timestamps: true,
   }
 );
 
-// Export only the class, not the module
 export default MenuItem;
