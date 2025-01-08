@@ -1,30 +1,32 @@
 import { Inter } from "next/font/google";
+import PublicLayout from "@/app/layouts/PublicLayout";
+import ProtectedLayout from "@/app/layouts/ProtectedLayout";
 import { Providers } from "@/app/providers";
-import { Header } from "@/app/components/layout/header";
-import { Footer } from "@/app/components/layout/footer";
 import "@/app/styles/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata = {
-  title: "La Maison - Restaurante",
-  description: "Alta cocina y reservas",
-} as const;
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;
+  readonly isPublic?: boolean;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({
+  children,
+  isPublic = true,
+}: RootLayoutProps) {
+  const Layout = isPublic ? PublicLayout : ProtectedLayout;
+
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        <title>Restaurante La Maison</title>
+        <meta name="description" content="Your app description here" />
+        {}
+      </head>
       <body className={inter.className}>
         <Providers>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1 pt-16">{children}</main>
-            <Footer />
-          </div>
+          <Layout>{children}</Layout>
         </Providers>
       </body>
     </html>

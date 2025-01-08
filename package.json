@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "docker:up": "docker-compose up",
+    "docker:dev": "node scripts/set-env.js dev && docker-compose up --build",
+    "docker:debug": "node scripts/set-env.js debug && docker-compose up --build",
+    "docker:up": "docker-compose up --build",
     "docker:build": "docker-compose build",
     "docker:down": "docker-compose down",
     "docker:start": "docker-compose up -d",

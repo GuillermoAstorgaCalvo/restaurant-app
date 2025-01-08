@@ -44,7 +44,7 @@ MenuItem.init(
     sequelize,
     tableName: "menus",
     timestamps: true,
-  }
+  },
 );
 
 export default MenuItem;

@@ -39,9 +39,7 @@ import MenuItem from "../models/menu";
     ];
 
     await MenuItem.bulkCreate(menuItems);
-    console.log("Sample menu items seeded successfully.");
   } catch (error) {
-    console.error("Error seeding menu items:", error);
   } finally {
     process.exit();
   }

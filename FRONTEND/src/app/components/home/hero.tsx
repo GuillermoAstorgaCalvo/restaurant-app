@@ -7,7 +7,7 @@ import { fadeInUp, scaleUp, transitions } from "@/app/animations";
 
 export function Hero() {
   return (
-    <div className="relative h-[600px] w-full">
+    <div suppressHydrationWarning className="relative h-[600px] w-full">
       <Image
         src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0"
         alt="Interior del restaurante"

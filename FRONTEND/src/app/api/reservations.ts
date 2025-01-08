@@ -1,31 +1,58 @@
-import api from "./index";
-import type { Reservation, CreateReservationData } from "@/app/types/index";
+import { api } from "./config"; // Ensure `api` is correctly configured with the base URL
+import { Reservation, CreateReservationData } from "@/app/types/reservation";
 
-export async function createReservation(
-  data: CreateReservationData,
-): Promise<Reservation> {
-  const response = await api.post<Reservation>("/reservations", data);
-  return response.data;
-}
+export const reservationsApi = {
+  getAll: async (): Promise<Reservation[]> => {
+    try {
+      const { data } = await api.get<Reservation[]>("/reservations");
+      return data;
+    } catch (error) {
+      console.error("Error fetching reservations:", error);
+      throw error; // Re-throw the error for further handling
+    }
+  },
 
-export async function fetchReservations(): Promise<Reservation[]> {
-  const response = await api.get<Reservation[]>("/reservations");
-  return response.data;
-}
+  getById: async (id: number): Promise<Reservation> => {
+    try {
+      const { data } = await api.get<Reservation>(`/reservations/${id}`);
+      return data;
+    } catch (error) {
+      console.error(`Error fetching reservation with ID ${id}:`, error);
+      throw error;
+    }
+  },
 
-export async function fetchReservationById(id: number): Promise<Reservation> {
-  const response = await api.get<Reservation>(`/reservations/${id}`);
-  return response.data;
-}
+  create: async (reservation: CreateReservationData): Promise<Reservation> => {
+    try {
+      const { data } = await api.post<Reservation>(
+        "/reservations",
+        reservation,
+      );
+      return data;
+    } catch (error) {
+      console.error("Error creating reservation:", error);
+      throw error;
+    }
+  },
 
-export async function updateReservation(
-  id: number,
-  data: Partial<CreateReservationData>,
-): Promise<Reservation> {
-  const response = await api.put<Reservation>(`/reservations/${id}`, data);
-  return response.data;
-}
+  update: async (id: number, status: string): Promise<Reservation> => {
+    try {
+      const { data } = await api.put<Reservation>(`/reservations/${id}`, {
+        status,
+      });
+      return data;
+    } catch (error) {
+      console.error(`Error updating reservation with ID ${id}:`, error);
+      throw error;
+    }
+  },
 
-export async function deleteReservation(id: number): Promise<void> {
-  await api.delete(`/reservations/${id}`);
-}
+  delete: async (id: number): Promise<void> => {
+    try {
+      await api.delete(`/reservations/${id}`);
+    } catch (error) {
+      console.error(`Error deleting reservation with ID ${id}:`, error);
+      throw error;
+    }
+  },
+};

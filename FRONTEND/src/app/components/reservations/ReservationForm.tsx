@@ -14,7 +14,7 @@ import { cn } from "@/app/lib/utils/cn";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { CalendarIcon, Users } from "lucide-react";
-import { useReservation } from "@/app/hooks/use-reservations";
+import { useReservations } from "@/app/hooks/useReservations";
 import { TimePicker } from "./TimePicker";
 import { combineDateAndTime } from "@/app/lib/utils/date";
 import { toast } from "sonner";
@@ -39,7 +39,7 @@ const initialFormData: FormData = {
 
 export function ReservationForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const { loading, createReservation } = useReservation();
+  const { loading, createReservation, reservations } = useReservations(); // Assuming 'reservations' is returned here
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -60,8 +60,11 @@ export function ReservationForm() {
     const dateTime = combineDateAndTime(formData.date, formData.time);
 
     const success = await createReservation({
-      ...formData,
-      date: dateTime.toISOString(),
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      date: dateTime, // Send only the combined ISO date
+      guests: formData.guests,
     });
 
     if (success) {
@@ -144,6 +147,8 @@ export function ReservationForm() {
           <TimePicker
             value={formData.time}
             onChange={(time) => setFormData((prev) => ({ ...prev, time }))}
+            date={formData.date || new Date()} // Pass a valid Date (fallback to current date if undefined)
+            reservations={reservations || []} // Ensure 'reservations' is passed
           />
         </div>
 

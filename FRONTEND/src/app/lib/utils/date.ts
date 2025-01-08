@@ -1,23 +1,44 @@
-export function generateTimeSlots(
-  startHour = 12,
-  endHour = 23,
-  interval = 30,
-): string[] {
-  const timeSlots: string[] = [];
+import { Reservation } from "@/app/types/reservation";
+import { RESTAURANT_CONFIG } from "../constants/restaurant";
 
-  for (let hour = startHour; hour <= endHour; hour++) {
-    for (let minutes = 0; minutes < 60; minutes += interval) {
-      const time = `${hour.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
-      timeSlots.push(time);
-    }
-  }
-
-  return timeSlots;
+export function getMinDateTime(): Date {
+  const now = new Date();
+  return new Date(
+    now.getTime() +
+      RESTAURANT_CONFIG.reservations.minHoursInAdvance * 60 * 60 * 1000,
+  );
 }
 
-export function combineDateAndTime(date: Date, timeString: string): Date {
-  const [hours, minutes] = timeString.split(":").map(Number);
-  const newDate = new Date(date);
-  newDate.setHours(hours, minutes);
-  return newDate;
+export function getReservationsInHour(
+  reservations: Reservation[],
+  date: Date,
+): number {
+  const hourStart = new Date(date);
+  hourStart.setMinutes(0, 0, 0);
+  const hourEnd = new Date(hourStart);
+  hourEnd.setHours(hourStart.getHours() + 1);
+
+  return reservations.filter((reservation) => {
+    const reservationDate = new Date(reservation.date);
+    return reservationDate >= hourStart && reservationDate < hourEnd;
+  }).length;
+}
+
+export function isTimeSlotAvailable(
+  date: Date,
+  reservations: Reservation[],
+): boolean {
+  const hourReservations = getReservationsInHour(reservations, date);
+  return hourReservations < RESTAURANT_CONFIG.reservations.maxPerHour;
+}
+
+export function isValidReservationTime(date: Date): boolean {
+  return date >= getMinDateTime();
+}
+
+export function combineDateAndTime(date: Date, time: string): string {
+  const [hours, minutes] = time.split(":").map(Number);
+  const combinedDate = new Date(date);
+  combinedDate.setHours(hours, minutes, 0, 0); // Combine date and time
+  return combinedDate.toISOString(); // Ensure ISO format
 }

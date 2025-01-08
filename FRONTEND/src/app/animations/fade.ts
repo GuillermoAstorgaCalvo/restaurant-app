@@ -5,7 +5,7 @@ export const fadeIn = {
 } as const;
 
 export const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 1, y: 0 },
   visible: { opacity: 1, y: 0 },
 } as const;
 

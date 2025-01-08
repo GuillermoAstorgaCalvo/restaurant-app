@@ -1,25 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ES2022", // Soporte para las características más recientes de JavaScript.
-    "module": "CommonJS", // Módulo para compatibilidad con Node.js.
-    "strict": true, // Habilita comprobaciones estrictas de TypeScript.
-    "esModuleInterop": true, // Interoperabilidad con módulos CommonJS.
-    "allowSyntheticDefaultImports": true, // Permite importar por defecto módulos CommonJS.
-    "resolveJsonModule": true, // Permite importar archivos JSON como módulos.
-    "skipLibCheck": true, // Omite comprobaciones de tipos en las dependencias.
-    "forceConsistentCasingInFileNames": true, // Asegura consistencia en nombres de archivos.
-    "noImplicitAny": true, // Evita el uso implícito del tipo `any`.
-    "outDir": "./dist", // Carpeta de salida para archivos transpilados.
-    "rootDir": "./src", // Directorio raíz de entrada de TypeScript.
-    "incremental": true, // Mejora tiempos de compilación al usar compilaciones incrementales.
-    "moduleResolution": "node", // Resolución de módulos estilo Node.js.
-    "types": ["node"], // Incluye tipos de Node.js.
-    "lib": ["ES2022"], // Incluye bibliotecas necesarias para ES2022.
-    "baseUrl": "./", // Base para rutas relativas.
+    "target": "ES2022",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "incremental": true,
+    "moduleResolution": "node",
+    "types": ["node"],
+    "lib": ["ES2022"],
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"] // Alias para rutas limpias.
-    }
+      "@/*": ["src/*"]
+    },
+    "sourceMap": true,
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["src/**/*"], // Archivos incluidos en la compilación.
-  "exclude": ["node_modules", "dist"] // Archivos y carpetas a excluir.
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

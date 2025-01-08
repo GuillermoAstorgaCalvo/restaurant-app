@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbo",
+    "debug": "NODE_OPTIONS='--inspect=0.0.0.0:9240' next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -41,7 +42,8 @@
     "react-dom": "^19.0.0",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

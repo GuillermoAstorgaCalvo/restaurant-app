@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { formatPrice } from "@/app/lib/utils";
+import { formatPrice } from "@/app/lib/utils/format";
 import { staggerContainer, menuItem, transitions } from "@/app/animations";
 
 const featuredItems = [

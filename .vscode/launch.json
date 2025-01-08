@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Backend (Docker)",
+      "type": "node",
+      "request": "attach",
+      "address": "localhost",
+      "port": 9229,
+      "localRoot": "${workspaceFolder}/BACKEND",
+      "remoteRoot": "/usr/src/app",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug Frontend (Node in Docker)",
+      "type": "node",
+      "request": "attach",
+      "address": "localhost",
+      "port": 9240,
+      "localRoot": "${workspaceFolder}/FRONTEND",
+      "remoteRoot": "/usr/src/app",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug Frontend (Next.js Router in Docker)",
+      "type": "node",
+      "request": "attach",
+      "address": "localhost",
+      "port": 9241,
+      "localRoot": "${workspaceFolder}/FRONTEND",
+      "remoteRoot": "/usr/src/app",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}

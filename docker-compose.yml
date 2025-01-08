@@ -4,10 +4,12 @@ services:
       context: ./BACKEND
     ports:
       - "3001:3001"
+      - "9229:9229"
     env_file:
-      - ./BACKEND/.env # Explicitly reference the backend .env file
+      - ./BACKEND/.env
     volumes:
       - ./BACKEND:/usr/src/app
+    command: ${BACKEND_COMMAND:-npm run dev}
     depends_on:
       postgres:
         condition: service_healthy
@@ -19,10 +21,13 @@ services:
       context: ./FRONTEND
     ports:
       - "3000:3000"
+      - "9240:9240"
+      - "9241:9241"
     env_file:
-      - ./FRONTEND/.env # Explicitly reference the frontend .env file
+      - ./FRONTEND/.env
     volumes:
       - ./FRONTEND:/usr/src/app
+    command: ${FRONTEND_COMMAND:-npm run dev}
     depends_on:
       - backend
     networks:
@@ -31,9 +36,9 @@ services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_USER: ${DB_USER} # User for the database
-      POSTGRES_PASSWORD: ${DB_PASSWORD} # Password for the database
-      POSTGRES_DB: ${DB_NAME} # The actual database name
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5432:5432"
     volumes:

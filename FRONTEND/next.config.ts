@@ -14,6 +14,9 @@ const nextConfig = {
   eslint: {
     dirs: ["src", "scripts"],
   },
+  serverRuntimeConfig: {
+    inspectPort: 9230,
+  },
 };
 
 export default nextConfig;

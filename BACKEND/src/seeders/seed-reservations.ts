@@ -10,6 +10,8 @@ import Reservation, { ReservationStatus } from "../models/reservation";
         date: new Date("2024-01-10T19:00:00"),
         guests: 4,
         status: "pendiente" as ReservationStatus,
+        created_at: new Date(), // Use snake_case
+        updated_at: new Date(), // Use snake_case
       },
       {
         name: "Jane Smith",
@@ -18,13 +20,13 @@ import Reservation, { ReservationStatus } from "../models/reservation";
         date: new Date("2024-01-11T20:00:00"),
         guests: 2,
         status: "confirmada" as ReservationStatus,
+        created_at: new Date(),
+        updated_at: new Date(),
       },
     ];
 
     await Reservation.bulkCreate(reservations);
-    console.log("Sample reservations seeded successfully.");
   } catch (error) {
-    console.error("Error seeding reservations:", error);
   } finally {
     process.exit();
   }
