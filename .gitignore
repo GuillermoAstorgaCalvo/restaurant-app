@@ -37,7 +37,7 @@ FRONTEND/.pnpm-debug.log*
 # env files (can opt-in for committing if needed)
 FRONTEND/.env*
 BACKEND/.env*
-.env
+/.env
 
 # vercel
 FRONTEND/.vercel
