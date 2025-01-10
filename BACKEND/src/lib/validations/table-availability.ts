@@ -1,9 +1,4 @@
-// Configuración de mesas
-const TABLE_CONFIG = {
-  small: { capacity: 2, count: 4 }, // 4 mesas de 2 personas
-  medium: { capacity: 4, count: 6 }, // 6 mesas de 4 personas
-  large: { capacity: 6, count: 2 }, // 2 mesas de 6 personas
-};
+import { TABLE_CONFIG } from "@/config/restaurant";
 
 export async function validateTableCapacity(guests: number) {
   if (guests <= 0) {

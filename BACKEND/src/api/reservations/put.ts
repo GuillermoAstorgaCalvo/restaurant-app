@@ -1,20 +1,32 @@
 import { RequestHandler } from "express";
 import Reservation from "../../models/reservation";
 
-export const updateReservation: RequestHandler = async (req, res) => {
+export const updateReservation: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
 
-    const reservation = await Reservation.findByPk(id);
-    if (!reservation) {
-      res.status(404).json({ message: "Reservation not found." });
-      return; // Finaliza el controlador aquí
+    // Validate id
+    if (!id || isNaN(Number(id))) {
+      return res
+        .status(400)
+        .json({ mensaje: "El ID de la reserva es inválido." });
     }
 
+    // Find reservation
+    const reservation = await Reservation.findByPk(Number(id));
+    if (!reservation) {
+      return res.status(404).json({ mensaje: "Reserva no encontrada." });
+    }
+
+    // Update reservation
     await reservation.update({ status });
-    res.status(200).json(reservation);
+
+    return res.status(200).json({
+      mensaje: "Reserva actualizada exitosamente.",
+      reserva: reservation,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Error updating reservation.", error });
+    next(error);
   }
 };

@@ -57,7 +57,7 @@ Reservation.init(
       type: DataTypes.STRING(15),
       allowNull: false,
       validate: {
-        len: [10, 15],
+        len: [9, 15],
       },
     },
     date: {

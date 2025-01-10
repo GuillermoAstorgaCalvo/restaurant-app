@@ -19,6 +19,15 @@ import { TimePicker } from "./TimePicker";
 import { combineDateAndTime } from "@/app/lib/utils/date";
 import { toast } from "sonner";
 
+// Import validations from external files
+import {
+  validateName,
+  validateEmail,
+  validatePhone,
+} from "@/app/lib/validations/contact-info";
+import { validateGuests } from "@/app/lib/validations/guests";
+import { validateDate } from "@/app/lib/validations/date";
+
 interface FormData {
   name: string;
   email: string;
@@ -39,7 +48,50 @@ const initialFormData: FormData = {
 
 export function ReservationForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const { loading, createReservation, reservations } = useReservations(); // Assuming 'reservations' is returned here
+  const { loading, createReservation, reservations } = useReservations();
+
+  const validateForm = (): boolean => {
+    const { name, email, phone, date, time, guests } = formData;
+
+    if (!validateName(name).valid) {
+      toast.error(validateName(name).error);
+      return false;
+    }
+
+    if (!validateEmail(email).valid) {
+      toast.error(validateEmail(email).error);
+      return false;
+    }
+
+    if (!validatePhone(phone).valid) {
+      toast.error(validatePhone(phone).error);
+      return false;
+    }
+
+    if (!validateGuests(guests).valid) {
+      toast.error(validateGuests(guests).error);
+      return false;
+    }
+
+    if (!date) {
+      toast.error("Por favor, selecciona una fecha válida");
+      return false;
+    }
+
+    if (!time) {
+      toast.error("Por favor, selecciona una hora válida");
+      return false;
+    }
+
+    const dateTime = combineDateAndTime(date, time);
+
+    if (!validateDate(new Date(dateTime)).valid) {
+      toast.error(validateDate(new Date(dateTime)).error);
+      return false;
+    }
+
+    return true;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -52,18 +104,15 @@ export function ReservationForm() {
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
-    if (!formData.date || !formData.time) {
-      toast.error("Por favor, selecciona fecha y hora");
-      return;
-    }
+    if (!validateForm()) return;
 
-    const dateTime = combineDateAndTime(formData.date, formData.time);
+    const dateTime = combineDateAndTime(formData.date!, formData.time);
 
     const success = await createReservation({
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
-      date: dateTime, // Send only the combined ISO date
+      date: dateTime,
       guests: formData.guests,
     });
 
@@ -118,7 +167,7 @@ export function ReservationForm() {
                 variant="outline"
                 className={cn(
                   "w-full justify-start text-left font-normal",
-                  !formData.date && "text-muted-foreground",
+                  !formData.date && "text-muted-foreground"
                 )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
@@ -133,7 +182,12 @@ export function ReservationForm() {
               <Calendar
                 mode="single"
                 selected={formData.date}
-                onSelect={(date) => setFormData((prev) => ({ ...prev, date }))}
+                onSelect={(date) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    date, // No need to transform `null` here
+                  }))
+                }
                 disabled={(date) => date < new Date()}
                 locale={es}
                 className="rounded-md border"
@@ -147,8 +201,8 @@ export function ReservationForm() {
           <TimePicker
             value={formData.time}
             onChange={(time) => setFormData((prev) => ({ ...prev, time }))}
-            date={formData.date || new Date()} // Pass a valid Date (fallback to current date if undefined)
-            reservations={reservations || []} // Ensure 'reservations' is passed
+            date={formData.date || new Date()}
+            reservations={reservations || []}
           />
         </div>
 

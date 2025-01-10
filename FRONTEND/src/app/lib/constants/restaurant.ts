@@ -32,7 +32,7 @@ export const RESTAURANT_CONFIG: RestaurantConfig = {
   },
   shifts: {
     lunch: { start: 13, end: 16 },
-    dinner: { start: 19, end: 23 },
+    dinner: { start: 20, end: 23 },
   },
   details: {
     name: "La Maison",

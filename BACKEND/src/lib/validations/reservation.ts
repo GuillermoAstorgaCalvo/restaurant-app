@@ -30,6 +30,8 @@ export const createReservationSchema = z.object({
     .default("pendiente"),
 });
 
-export const updateReservationSchema = createReservationSchema.extend({
-  id: z.number().int("El ID debe ser un número entero"),
+export const updateReservationSchema = z.object({
+  status: z.enum(["pendiente", "confirmada", "cancelada"], {
+    required_error: "El estado es obligatorio",
+  }),
 });
