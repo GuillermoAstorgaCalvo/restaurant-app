@@ -25,7 +25,7 @@ reservationRouter.put(
   validate(updateReservationSchema),
   updateReservation,
 );
-reservationRouter.delete("/:id", deleteReservation);
+reservationRouter.delete("/", deleteReservation);
 
 // Rutas de disponibilidad con caché
 reservationRouter.get("/time-slots", getTimeSlots);

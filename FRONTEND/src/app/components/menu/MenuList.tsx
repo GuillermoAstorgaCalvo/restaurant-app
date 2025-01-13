@@ -1,6 +1,6 @@
 "use client";
 
-import { MenuItem } from "@/app/api/menu";
+import { MenuItem } from "@/app/api/menu/menu";
 import { MenuItemCard } from "./MenuItemCard";
 
 interface MenuListProps {

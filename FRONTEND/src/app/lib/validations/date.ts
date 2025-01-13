@@ -4,7 +4,7 @@ export function validateDate(date: Date): { valid: boolean; error?: string } {
   const now = new Date();
   const minDateTime = new Date(
     now.getTime() +
-      RESTAURANT_CONFIG.reservations.minHoursInAdvance * 60 * 60 * 1000
+      RESTAURANT_CONFIG.reservations.minHoursInAdvance * 60 * 60 * 1000,
   );
   const maxDateTime = new Date();
   maxDateTime.setDate(now.getDate() + 30); // Maximum 30 days in advance

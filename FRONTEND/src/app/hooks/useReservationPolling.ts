@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { reservationsApi } from "../api/reservations";
+import { reservationsApi } from "../api/reservations/reservations";
 import { Reservation } from "@/app/types/reservation";
 import { useReservationCache } from "./useReservationCache";
 

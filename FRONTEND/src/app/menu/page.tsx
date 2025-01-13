@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchMenuGroupedByCategory, GroupedMenuItems } from "@/app/api/menu";
+import {
+  fetchMenuGroupedByCategory,
+  GroupedMenuItems,
+} from "@/app/api/menu/menu";
 import { MenuList } from "@/app/components/menu/MenuList";
 
 export default function MenuPage() {

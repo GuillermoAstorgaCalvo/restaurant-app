@@ -167,7 +167,7 @@ export function ReservationForm() {
                 variant="outline"
                 className={cn(
                   "w-full justify-start text-left font-normal",
-                  !formData.date && "text-muted-foreground"
+                  !formData.date && "text-muted-foreground",
                 )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />

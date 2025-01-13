@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { reservationsApi } from "@/app/api/reservations";
+import { reservationsApi } from "@/app/api/reservations/reservations";
 import { Reservation } from "@/app/types/reservation";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";

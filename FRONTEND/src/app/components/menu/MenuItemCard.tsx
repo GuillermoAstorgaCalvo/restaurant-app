@@ -1,4 +1,4 @@
-import { MenuItem } from "@/app/api/menu";
+import { MenuItem } from "@/app/api/menu/menu";
 import Image from "next/image";
 
 interface MenuItemCardProps {

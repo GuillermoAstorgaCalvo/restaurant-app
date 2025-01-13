@@ -54,7 +54,7 @@ Admin.init(
     tableName: "admins",
     timestamps: true,
     underscored: true,
-  }
+  },
 );
 
 export default Admin;

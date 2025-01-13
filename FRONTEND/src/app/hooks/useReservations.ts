@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { reservationsApi } from "@/app/api/reservations";
+import { reservationsApi } from "@/app/api/reservations/reservations";
 import { CreateReservationData, Reservation } from "@/app/types/reservation";
 import { toast } from "sonner";
 import { createReservationSchema } from "@/app/lib/validations/reservation";
