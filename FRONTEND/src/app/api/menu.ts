@@ -6,16 +6,15 @@ export interface MenuItem {
   description: string;
   price: number;
   imageUrl: string;
-  category: string; // Include category
+  category: string;
 }
 
-export type GroupedMenuItems = Record<string, MenuItem[]>; // Define grouped menu items type
+export type GroupedMenuItems = Record<string, MenuItem[]>;
 
 export async function fetchMenuGroupedByCategory(): Promise<GroupedMenuItems> {
   const response = await api.get<MenuItem[]>("/menu");
   const items = response.data;
 
-  // Group items by category
   return items.reduce((acc, item) => {
     if (!acc[item.category]) acc[item.category] = [];
     acc[item.category].push(item);

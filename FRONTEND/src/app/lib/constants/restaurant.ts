@@ -37,9 +37,9 @@ export const RESTAURANT_CONFIG: RestaurantConfig = {
   details: {
     name: "La Maison",
     address: "Calle del Restaurante 123",
-    city: "Madrid",
-    state: "Madrid",
-    zip: "28001",
+    city: "Málaga",
+    state: "Málaga",
+    zip: "29001",
     phone: "(+34) 91 123 4567",
     email: "info@lamaison.com",
   },

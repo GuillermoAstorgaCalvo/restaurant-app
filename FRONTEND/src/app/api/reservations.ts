@@ -1,4 +1,4 @@
-import { api } from "./config"; // Ensure `api` is correctly configured with the base URL
+import { api } from "./config";
 import { Reservation, CreateReservationData } from "@/app/types/reservation";
 
 export const reservationsApi = {
@@ -8,7 +8,7 @@ export const reservationsApi = {
       return data;
     } catch (error) {
       console.error("Error fetching reservations:", error);
-      throw error; // Re-throw the error for further handling
+      throw error;
     }
   },
 
@@ -26,7 +26,7 @@ export const reservationsApi = {
     try {
       const { data } = await api.post<Reservation>(
         "/reservations",
-        reservation,
+        reservation
       );
       return data;
     } catch (error) {

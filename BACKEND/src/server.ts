@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import menuRouter from "./api/menu";
 import reservationRouter from "./api/reservations";
+import adminRoutes from "./api/admin";
 import { errorHandler } from "./middleware/error-handler";
 
 dotenv.config();
@@ -10,18 +11,14 @@ dotenv.config();
 const app = express();
 const PORT = Number(process.env.PORT) || 3001;
 
-// Enable CORS
-app.use(cors({ origin: "*" })); // Update this for stricter control in production
+app.use(cors({ origin: "*" }));
 
-// Middleware for JSON parsing
 app.use(express.json());
 
-// Debugging Middleware: Logs incoming requests
 app.use((req, res, next) => {
   next();
 });
 
-// Middleware to validate Content-Type
 app.use((req, res, next) => {
   if (
     req.method !== "GET" &&
@@ -34,19 +31,18 @@ app.use((req, res, next) => {
   next();
 });
 
-// Health Check Route
 app.get("/", (req, res) => {
   res.status(200).send("Servidor backend funcionando");
 });
 
-// API Routes
 app.use("/api/menu", menuRouter);
 app.use("/api/reservations", reservationRouter);
+app.use("/api/admin", adminRoutes);
 
-// Error Handling Middleware
-app.use(errorHandler); // Dedicated middleware for consistent error responses
-
-// Start the Server
-app.listen(PORT, "0.0.0.0", () => {});
+app.use(errorHandler);
 
 export default app;
+
+if (require.main === module) {
+  app.listen(PORT, "0.0.0.0");
+}
