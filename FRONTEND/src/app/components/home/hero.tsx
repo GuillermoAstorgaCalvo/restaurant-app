@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { fadeInUp, scaleUp, transitions } from "@/app/animations";
+import { fadeInUp, scaleUp, transitions } from "@/app/animations/index";
 
 export function Hero() {
   return (

@@ -1,4 +1,3 @@
-// Common transition presets
 export const transitions = {
   default: { duration: 0.5 },
   slow: { duration: 0.8 },

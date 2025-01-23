@@ -6,7 +6,7 @@ interface CacheEntry {
   timestamp: number;
 }
 
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
+const CACHE_DURATION = 5 * 60 * 1000;
 
 export function useAvailabilityCache() {
   const [cache, setCache] = useState<Record<string, CacheEntry>>({});

@@ -9,6 +9,7 @@ services:
       - ./BACKEND/.env
     volumes:
       - ./BACKEND:/usr/src/app
+      - /usr/src/app/node_modules
     command: ${BACKEND_COMMAND:-npm run dev}
     depends_on:
       postgres:
@@ -27,7 +28,11 @@ services:
       - ./FRONTEND/.env
     volumes:
       - ./FRONTEND:/usr/src/app
+      - /usr/src/app/node_modules
     command: ${FRONTEND_COMMAND:-npm run dev}
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      NEXT_DEV: "true"
     depends_on:
       - backend
     networks:
@@ -48,6 +53,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
     networks:
       - app-network
 

@@ -6,20 +6,17 @@ export const updateReservation: RequestHandler = async (req, res, next) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    // Validate id
     if (!id || isNaN(Number(id))) {
       return res
         .status(400)
         .json({ mensaje: "El ID de la reserva es inválido." });
     }
 
-    // Find reservation
     const reservation = await Reservation.findByPk(Number(id));
     if (!reservation) {
       return res.status(404).json({ mensaje: "Reserva no encontrada." });
     }
 
-    // Update reservation
     await reservation.update({ status });
 
     return res.status(200).json({

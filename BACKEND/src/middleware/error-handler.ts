@@ -4,7 +4,6 @@ import { ZodError } from "zod";
 import { AppError } from "../lib/errors";
 
 export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  // Handle Sequelize validation errors
   if (err instanceof SequelizeValidationError) {
     return res.status(400).json({
       error: "Sequelize Validation Error",
@@ -15,7 +14,6 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     });
   }
 
-  // Handle Zod validation errors
   if (err instanceof ZodError) {
     return res.status(400).json({
       error: "Zod Validation Error",
@@ -26,7 +24,6 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     });
   }
 
-  // Handle AppError or other custom errors
   if (err instanceof AppError) {
     return res.status(err.statusCode || 500).json({
       error: err.name,
@@ -35,7 +32,6 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     });
   }
 
-  // Handle general errors with a statusCode property
   if ("statusCode" in err && typeof err.statusCode === "number") {
     return res.status(err.statusCode).json({
       error: err.name || "Error",
@@ -43,7 +39,6 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     });
   }
 
-  // Fallback for unexpected errors
   res.status(500).json({
     error: "Internal Server Error",
     message: err.message || "An unexpected error occurred.",

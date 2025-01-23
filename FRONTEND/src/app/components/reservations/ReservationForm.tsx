@@ -19,7 +19,6 @@ import { TimePicker } from "./TimePicker";
 import { combineDateAndTime } from "@/app/lib/utils/date";
 import { toast } from "sonner";
 
-// Import validations from external files
 import {
   validateName,
   validateEmail,
@@ -131,6 +130,7 @@ export function ReservationForm() {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            placeholder="Escribe tu nombre aquí"
             required
           />
         </div>
@@ -143,6 +143,7 @@ export function ReservationForm() {
             type="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="ej: nombre@ejemplo.com"
             required
           />
         </div>
@@ -155,6 +156,7 @@ export function ReservationForm() {
             type="tel"
             value={formData.phone}
             onChange={handleChange}
+            placeholder="ej: +34 123 456 789"
             required
           />
         </div>
@@ -185,7 +187,7 @@ export function ReservationForm() {
                 onSelect={(date) =>
                   setFormData((prev) => ({
                     ...prev,
-                    date, // No need to transform `null` here
+                    date,
                   }))
                 }
                 disabled={(date) => date < new Date()}
@@ -208,18 +210,32 @@ export function ReservationForm() {
 
         <div className="grid gap-2">
           <Label htmlFor="guests">Número de personas</Label>
-          <div className="flex items-center space-x-2">
-            <Users className="h-4 w-4 text-muted-foreground" />
-            <Input
-              id="guests"
-              name="guests"
-              type="number"
-              min="1"
-              max="10"
-              value={formData.guests}
-              onChange={handleChange}
-              required
-            />
+          <div className="flex items-center justify-between space-x-4">
+            <div className="flex items-center space-x-2">
+              <Users className="h-4 w-4 text-muted-foreground" />
+              <select
+                id="guests"
+                name="guests"
+                value={formData.guests}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    guests: parseInt(e.target.value, 10),
+                  }))
+                }
+                required
+                className="border bg-white rounded-md p-2"
+              >
+                {Array.from({ length: 8 }, (_, i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1}
+                  </option>
+                ))}
+              </select>
+              <span className="text-sm text-muted-foreground">
+                Selecciona el número de comensales
+              </span>
+            </div>
           </div>
         </div>
       </div>

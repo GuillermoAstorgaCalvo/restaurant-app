@@ -5,7 +5,6 @@ export function validateTimeSlot(date: Date) {
   const minutes = date.getMinutes();
   const { shifts, interval } = RESTAURANT_CONFIG;
 
-  // Verificar horario de apertura
   const isLunchTime = hour >= shifts.lunch.start && hour < shifts.lunch.end;
   const isDinnerTime = hour >= shifts.dinner.start && hour < shifts.dinner.end;
 
@@ -18,7 +17,6 @@ export function validateTimeSlot(date: Date) {
     };
   }
 
-  // Verificar intervalos de reserva
   if (minutes % interval !== 0) {
     return {
       valid: false,

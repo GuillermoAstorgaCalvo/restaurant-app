@@ -12,10 +12,12 @@ const AdminDashboard = () => {
 
   return (
     <ProtectedRoute>
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-col h-screen bg-gray-100">
         <AdminHeader />
+
         <div className="flex flex-grow">
           <Sidebar setSelectedSection={setSelectedSection} />
+
           <DashboardContainer selectedSection={selectedSection} />
         </div>
       </div>

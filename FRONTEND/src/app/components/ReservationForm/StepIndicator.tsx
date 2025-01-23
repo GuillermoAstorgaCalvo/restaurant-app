@@ -1,5 +1,5 @@
 interface Props {
-  currentStep: number;
+  readonly currentStep: number;
 }
 
 export function StepIndicator({ currentStep }: Props) {

@@ -3,17 +3,17 @@ import { CalendarClock } from "lucide-react";
 
 const SEASONS = {
   high: [
-    { start: "2024-07-01", end: "2024-08-31" }, // Verano
-    { start: "2024-12-15", end: "2024-12-31" }, // Navidad
+    { start: "2024-07-01", end: "2024-08-31" },
+    { start: "2024-12-15", end: "2024-12-31" },
   ],
   low: [
-    { start: "2024-01-15", end: "2024-02-28" }, // Después de navidad
-    { start: "2024-09-15", end: "2024-10-31" }, // Otoño
+    { start: "2024-01-15", end: "2024-02-28" },
+    { start: "2024-09-15", end: "2024-10-31" },
   ],
 };
 
 interface Props {
-  date: string;
+  readonly date: string;
 }
 
 export function SeasonIndicator({ date }: Props) {

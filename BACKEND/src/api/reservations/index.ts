@@ -13,7 +13,6 @@ import {
 
 const reservationRouter = Router();
 
-// Rutas existentes con validación
 reservationRouter.get("/", getReservations);
 reservationRouter.post(
   "/",
@@ -27,7 +26,6 @@ reservationRouter.put(
 );
 reservationRouter.delete("/", deleteReservation);
 
-// Rutas de disponibilidad con caché
 reservationRouter.get("/time-slots", getTimeSlots);
 reservationRouter.get("/availability", getAvailability);
 

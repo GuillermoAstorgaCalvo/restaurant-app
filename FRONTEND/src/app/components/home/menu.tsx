@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { formatPrice } from "@/app/lib/utils/format";
+import { formatEuro } from "@/app/lib/utils/format";
 import { staggerContainer, menuItem, transitions } from "@/app/animations";
 
 const featuredItems = [
@@ -67,7 +67,7 @@ export function Menu() {
                 <div className="mb-2 flex items-center justify-between">
                   <h3 className="text-xl font-semibold">{item.name}</h3>
                   <span className="text-lg font-medium text-primary">
-                    {formatPrice(item.price)}
+                    {formatEuro(item.price)}
                   </span>
                 </div>
                 <p className="text-muted-foreground">{item.description}</p>

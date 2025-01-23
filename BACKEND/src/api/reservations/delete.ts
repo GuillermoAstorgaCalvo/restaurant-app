@@ -3,7 +3,7 @@ import Reservation from "../../models/reservation";
 
 export const deleteReservation: RequestHandler = async (req, res) => {
   try {
-    const { id } = req.body; // Get the ID from the request body
+    const { id } = req.body;
 
     if (!id || isNaN(Number(id))) {
       return res.status(400).json({ message: "Invalid reservation ID." });

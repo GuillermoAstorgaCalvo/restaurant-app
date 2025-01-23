@@ -6,7 +6,6 @@ const MAX_LARGE_GROUPS_PER_DAY = 2;
 
 export async function validateGroupSize(date: Date, guests: number) {
   if (guests >= 6) {
-    // Validar anticipación para grupos grandes
     const hoursInAdvance =
       (date.getTime() - new Date().getTime()) / (1000 * 60 * 60);
     if (hoursInAdvance < MIN_HOURS_ADVANCE_LARGE_GROUPS) {
@@ -16,7 +15,6 @@ export async function validateGroupSize(date: Date, guests: number) {
       };
     }
 
-    // Validar límite de grupos grandes por día
     const isWeekend = date.getDay() === 0 || date.getDay() === 6;
     if (isWeekend) {
       const existingLargeGroups = await Reservation.count({

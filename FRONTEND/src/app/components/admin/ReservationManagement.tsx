@@ -5,11 +5,14 @@ import {
   deleteReservation,
 } from "@/app/services/reservationService";
 import { Reservation, ReservationStatus } from "@/app/types/reservation";
+import ReservationEditForm from "@/app/components/admin/ReservationEditForm";
 
 const ReservationManagement = () => {
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("");
+  const [editingReservation, setEditingReservation] =
+    useState<Reservation | null>(null);
 
   useEffect(() => {
     const loadReservations = async () => {
@@ -52,86 +55,152 @@ const ReservationManagement = () => {
     }
   };
 
+  const openEditForm = (reservation: Reservation) => {
+    setEditingReservation(reservation);
+  };
+
+  const closeEditForm = () => {
+    setEditingReservation(null);
+  };
+
+  const handleSave = async (updatedReservation: Reservation) => {
+    try {
+      await updateReservationStatus(
+        updatedReservation.id,
+        updatedReservation.status,
+      );
+      setReservations((prev) =>
+        prev.map((res) =>
+          res.id === updatedReservation.id ? updatedReservation : res,
+        ),
+      );
+      closeEditForm();
+    } catch (error) {
+      console.error("Error updating reservation:", error);
+    }
+  };
+
+  const getStatusClass = (status: string) => {
+    switch (status) {
+      case "pendiente":
+        return "bg-yellow-100 text-yellow-800";
+      case "confirmada":
+        return "bg-green-100 text-green-800";
+      case "finalizada":
+        return "bg-blue-100 text-blue-800";
+      default:
+        return "bg-red-100 text-red-800";
+    }
+  };
+
   const filteredReservations = reservations.filter((res) =>
     filter ? res.status === filter : true,
   );
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Reservas</h2>
-      <div className="mb-4">
-        <label htmlFor="statusFilter" className="mr-2">
-          Ordenar por estado:
-        </label>
-        <select
-          id="statusFilter"
-          onChange={(e) => setFilter(e.target.value)}
-          className="border border-gray-300 p-2 rounded"
-        >
-          <option value="">All</option>
-          <option value="pendiente">Pendiente</option>
-          <option value="confirmada">Confirmada</option>
-          <option value="finalizada">Finalizada</option>
-          <option value="cancelada">Cancelada</option>
-        </select>
-      </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <table className="min-w-full border-collapse border border-gray-300">
-          <thead>
-            <tr>
-              <th className="border border-gray-300 p-2">Nombre del cliente</th>
-              <th className="border border-gray-300 p-2">Fecha</th>
-              <th className="border border-gray-300 p-2">Comensales</th>
-              <th className="border border-gray-300 p-2">Estado</th>
-              <th className="border border-gray-300 p-2">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredReservations.map((reservation) => (
-              <tr key={reservation.id}>
-                <td className="border border-gray-300 p-2">
-                  {reservation.name}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  {new Date(reservation.date).toLocaleString()}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  {reservation.guests}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  {reservation.status}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <button
-                    className="bg-green-500 text-white px-2 py-1 rounded mr-2"
-                    onClick={() =>
-                      handleStatusUpdate(reservation.id, "confirmada")
-                    }
-                  >
-                    Confirmar
-                  </button>
-                  <button
-                    className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
-                    onClick={() =>
-                      handleStatusUpdate(reservation.id, "cancelada")
-                    }
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                    onClick={() => handleDelete(reservation.id)}
-                  >
-                    Eliminar
-                  </button>
-                </td>
+    <div className="flex justify-center items-start min-h-screen pt-10">
+      <div className="p-8 bg-white shadow-lg rounded-lg w-full max-w-6xl">
+        <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-800">
+          Gestión de Reservas
+        </h2>
+        <div className="mb-6 flex items-center justify-end gap-2">
+          <label htmlFor="statusFilter" className="text-gray-700 font-medium">
+            Filtrar por estado:
+          </label>
+          <select
+            id="statusFilter"
+            onChange={(e) => setFilter(e.target.value)}
+            className="border border-gray-300 bg-gray-50 p-2 rounded-lg text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Todas</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmada">Confirmada</option>
+            <option value="finalizada">Finalizada</option>
+            <option value="cancelada">Cancelada</option>
+          </select>
+        </div>
+        {loading ? (
+          <p className="text-gray-600 text-center">Cargando...</p>
+        ) : (
+          <table className="w-full table-auto border-collapse rounded-lg shadow-md">
+            <thead className="bg-blue-500 text-white">
+              <tr>
+                <th className="p-3 text-center font-semibold">Cliente</th>
+                <th className="p-3 text-center font-semibold">Fecha</th>
+                <th className="p-3 text-center font-semibold">Comensales</th>
+                <th className="p-3 text-center font-semibold">Estado</th>
+                <th className="p-3 text-center font-semibold">Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {filteredReservations.map((reservation) => (
+                <tr
+                  key={reservation.id}
+                  className="hover:bg-gray-50 transition-colors"
+                >
+                  <td className="p-3 text-center truncate max-w-xs">
+                    {reservation.name}
+                  </td>
+                  <td className="p-3 text-center truncate max-w-xs">
+                    {new Date(reservation.date).toLocaleString()}
+                  </td>
+                  <td className="p-3 text-center">{reservation.guests}</td>
+                  <td className="p-3 text-center">
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusClass(
+                        reservation.status,
+                      )}`}
+                    >
+                      {reservation.status}
+                    </span>
+                  </td>
+                  <td className="p-3 flex flex-wrap justify-center gap-2">
+                    <button
+                      className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition text-sm"
+                      onClick={() =>
+                        handleStatusUpdate(reservation.id, "confirmada")
+                      }
+                    >
+                      Confirmar
+                    </button>
+                    <button
+                      className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition text-sm"
+                      onClick={() =>
+                        handleStatusUpdate(reservation.id, "cancelada")
+                      }
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition text-sm"
+                      onClick={() => openEditForm(reservation)}
+                    >
+                      Modificar
+                    </button>
+                    <button
+                      className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm"
+                      onClick={() => handleDelete(reservation.id)}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+        {editingReservation && (
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+              <ReservationEditForm
+                reservation={editingReservation}
+                onSave={handleSave}
+                onClose={closeEditForm}
+              />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

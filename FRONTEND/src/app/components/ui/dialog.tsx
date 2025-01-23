@@ -23,11 +23,11 @@ export function Dialog({
 
     if (dialog) {
       const handleCancel = (event: Event) => {
-        event.preventDefault(); // Prevents closing on "Esc" key if desired
+        event.preventDefault();
         onClose();
       };
 
-      dialog.addEventListener("cancel", handleCancel); // Listens for Esc key or native close
+      dialog.addEventListener("cancel", handleCancel);
       if (open) {
         if (!dialog.open) dialog.showModal();
         document.body.style.overflow = "hidden";

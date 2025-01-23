@@ -9,7 +9,6 @@ export async function isTimeSlotAvailable(date: Date): Promise<boolean> {
   const hourEnd = new Date(hourStart);
   hourEnd.setHours(hourStart.getHours() + 1);
 
-  // Verificar si está dentro del horario del restaurante
   const hour = date.getHours();
   const { shifts } = RESTAURANT_CONFIG;
 
@@ -20,7 +19,6 @@ export async function isTimeSlotAvailable(date: Date): Promise<boolean> {
     return false;
   }
 
-  // Contar reservas activas en la misma hora
   const reservationsCount = await Reservation.count({
     where: {
       date: {
@@ -33,7 +31,6 @@ export async function isTimeSlotAvailable(date: Date): Promise<boolean> {
     },
   });
 
-  // Verificar si hay espacio disponible
   return reservationsCount < RESTAURANT_CONFIG.maxReservationsPerHour;
 }
 
@@ -42,19 +39,17 @@ export async function findNextAvailableSlot(
   guests: number,
 ): Promise<Date | null> {
   const { shifts, interval } = RESTAURANT_CONFIG;
-  const maxAttempts = 48; // Buscar en las próximas 48 horas
+  const maxAttempts = 48;
   let attempts = 0;
   let currentDate = new Date(date);
 
   while (attempts < maxAttempts) {
     currentDate = new Date(currentDate.getTime() + interval * 60000);
 
-    // Saltar al siguiente día si estamos fuera del horario de cena
     if (currentDate.getHours() >= shifts.dinner.end) {
       currentDate.setDate(currentDate.getDate() + 1);
       currentDate.setHours(shifts.lunch.start, 0, 0, 0);
 
-      // Saltar lunes (día de descanso)
       if (currentDate.getDay() === 1) {
         currentDate.setDate(currentDate.getDate() + 1);
       }
@@ -65,7 +60,6 @@ export async function findNextAvailableSlot(
     const isDinnerTime =
       hour >= shifts.dinner.start && hour < shifts.dinner.end;
 
-    // Saltar horarios fuera de servicio
     if (!isLunchTime && !isDinnerTime) {
       if (hour < shifts.lunch.start) {
         currentDate.setHours(shifts.lunch.start, 0, 0, 0);

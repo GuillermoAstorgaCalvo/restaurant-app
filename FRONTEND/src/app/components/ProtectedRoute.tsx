@@ -16,42 +16,34 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
     if (token) {
       try {
-        // Decode the JWT token and check if it's valid
-        const decodedToken = JSON.parse(atob(token.split(".")[1])); // Decode JWT token
-        const currentTime = Date.now() / 1000; // Get current time in seconds
+        const decodedToken = JSON.parse(atob(token.split(".")[1]));
+        const currentTime = Date.now() / 1000;
 
-        // Check if token is expired
         if (decodedToken.exp < currentTime) {
           setIsAuthenticated(false);
-          localStorage.removeItem("token"); // Remove expired token
-          router.push("/admin/login"); // Redirect to login
+          localStorage.removeItem("token");
+          router.push("/admin/login");
         } else if (decodedToken.role !== "admin") {
-          // Ensure the role is 'admin'
           setIsAuthenticated(false);
-          router.push("/admin/login"); // Redirect to unauthorized page
+          router.push("/admin/login");
         } else {
-          // If the token is valid, set the user as authenticated
           setIsAuthenticated(true);
         }
       } catch {
-        // Catch errors (e.g., invalid token format)
         setIsAuthenticated(false);
         localStorage.removeItem("token");
         router.push("/admin/login");
       }
     } else {
-      // If no token is found, redirect to login
       setIsAuthenticated(false);
       router.push("/admin/login");
     }
   }, [router]);
 
-  // Show loading state while checking the token
   if (isAuthenticated === null) {
     return <div>Loading...</div>;
   }
 
-  // Render children if authenticated
   return <>{isAuthenticated && children}</>;
 };
 

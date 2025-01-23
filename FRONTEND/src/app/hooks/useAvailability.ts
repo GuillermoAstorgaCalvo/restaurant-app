@@ -45,7 +45,6 @@ export function useAvailability() {
   ): Promise<AvailabilityResponse> => {
     clearError();
 
-    // Attempt to fetch from cache first
     const cached = getCached(date);
     if (cached) return cached;
 
@@ -58,7 +57,6 @@ export function useAvailability() {
         },
       );
 
-      // Cache the result
       setCached(date, data);
       return data;
     } catch (err: unknown) {

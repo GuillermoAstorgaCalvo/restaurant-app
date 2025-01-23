@@ -43,7 +43,6 @@ export async function getDailyAvailability(date: Date): Promise<{
     dinner: [] as string[],
   };
 
-  // Generar slots para el almuerzo
   for (let hour = shifts.lunch.start; hour < shifts.lunch.end; hour++) {
     for (let minutes = 0; minutes < 60; minutes += interval) {
       const slotDate = new Date(date);
@@ -59,7 +58,6 @@ export async function getDailyAvailability(date: Date): Promise<{
     }
   }
 
-  // Generar slots para la cena
   for (let hour = shifts.dinner.start; hour < shifts.dinner.end; hour++) {
     for (let minutes = 0; minutes < 60; minutes += interval) {
       const slotDate = new Date(date);

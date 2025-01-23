@@ -9,13 +9,12 @@ export function useReservations() {
   const [loading, setLoading] = useState(false);
   const [reservations, setReservations] = useState<Reservation[]>([]);
 
-  // Fetch reservations when the component mounts
   useEffect(() => {
     const fetchReservations = async () => {
       try {
         setLoading(true);
-        const response = await reservationsApi.getAll(); // Fetch reservations from API
-        setReservations(response); // Set fetched reservations
+        const response = await reservationsApi.getAll();
+        setReservations(response);
       } catch (error) {
         console.error("Error fetching reservations:", error);
         toast.error("Error al cargar las reservas");
@@ -31,8 +30,6 @@ export function useReservations() {
     data: CreateReservationData,
   ): Promise<boolean> => {
     try {
-      console.log("Reservation Data Sent:", data); // Debugging log
-
       const validatedData = createReservationSchema.parse(data);
 
       await reservationsApi.create(validatedData);

@@ -6,9 +6,6 @@ export const TIME_SLOTS = [
   "14:30",
   "15:00",
   "15:30",
-  "16:00",
-  "19:00",
-  "19:30",
   "20:00",
   "20:30",
   "21:00",
@@ -16,13 +13,14 @@ export const TIME_SLOTS = [
   "22:00",
   "22:30",
   "23:00",
+  "23:30",
 ] as const;
 
 export const BUSINESS_HOURS = {
-  weekdays: "11:00 - 22:00",
-  saturday: "10:00 - 23:00",
-  sunday: "10:00 - 21:00",
+  weekdays: "13:00 - 16:00 / 20:00 - 24:00",
+  saturday: "13:00 - 16:00 / 20:00 - 24:00",
+  sunday: "cerrado",
 } as const;
 
-export const RESERVATION_DURATION = 90; // minutes
+export const RESERVATION_DURATION = 90;
 export const MAX_RESERVATIONS_PER_SLOT = 4;

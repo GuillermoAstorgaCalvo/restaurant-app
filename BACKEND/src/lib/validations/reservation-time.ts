@@ -12,7 +12,6 @@ export function validateReservationTime(date: Date): {
     now.getTime() + MIN_ADVANCE_HOURS * 60 * 60 * 1000,
   );
 
-  // Verificar que la fecha no sea pasada
   if (date < now) {
     return {
       valid: false,
@@ -20,7 +19,6 @@ export function validateReservationTime(date: Date): {
     };
   }
 
-  // Verificar anticipación mínima
   if (date < minDateTime) {
     return {
       valid: false,
@@ -30,7 +28,6 @@ export function validateReservationTime(date: Date): {
     };
   }
 
-  // Verificar que la fecha no sea más de 30 días en el futuro
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + MAX_ADVANCE_DAYS);
   if (date > maxDate) {

@@ -23,11 +23,9 @@ export const getAvailability: RequestHandler[] = [
         return res.status(400).json({ error: "Fecha inválida." });
       }
 
-      // Fetch availability data
       const hourlyAvailability = await getHourlyAvailability(requestDate);
       const dailyAvailability = await getDailyAvailability(requestDate);
 
-      // Respond with the availability data
       res.json({
         hourly: hourlyAvailability,
         daily: dailyAvailability,

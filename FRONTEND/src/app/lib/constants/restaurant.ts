@@ -12,7 +12,6 @@ export interface RestaurantConfig {
     name: string;
     address: string;
     city: string;
-    state: string;
     zip: string;
     phone: string;
     email: string;
@@ -32,16 +31,15 @@ export const RESTAURANT_CONFIG: RestaurantConfig = {
   },
   shifts: {
     lunch: { start: 13, end: 16 },
-    dinner: { start: 20, end: 23 },
+    dinner: { start: 20, end: 24 },
   },
   details: {
-    name: "La Maison",
-    address: "Calle del Restaurante 123",
+    name: "Mesón Astorga",
+    address: "C. Gerona, 11, Cruz de Humilladero,",
     city: "Málaga",
-    state: "Málaga",
     zip: "29001",
-    phone: "(+34) 91 123 4567",
-    email: "info@lamaison.com",
+    phone: "+34 952 34 68 32",
+    email: "contacto@mesonastorga.com",
   },
   socialLinks: {
     facebook: "https://facebook.com/lamaisonrestaurante",
@@ -53,7 +51,6 @@ export const RESTAURANT_CONFIG: RestaurantConfig = {
 export const RESTAURANT_NAME = RESTAURANT_CONFIG.details.name;
 export const RESTAURANT_ADDRESS = RESTAURANT_CONFIG.details.address;
 export const RESTAURANT_CITY = RESTAURANT_CONFIG.details.city;
-export const RESTAURANT_STATE = RESTAURANT_CONFIG.details.state;
 export const RESTAURANT_ZIP = RESTAURANT_CONFIG.details.zip;
 export const RESTAURANT_PHONE = RESTAURANT_CONFIG.details.phone;
 export const RESTAURANT_EMAIL = RESTAURANT_CONFIG.details.email;

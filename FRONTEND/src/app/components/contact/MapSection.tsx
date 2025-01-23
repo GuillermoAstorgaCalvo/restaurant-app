@@ -1,8 +1,7 @@
 "use client";
 
-import { config } from "dotenv";
-
-config();
+import { motion } from "framer-motion";
+import { fadeIn } from "@/app/animations";
 
 export function MapSection() {
   const apiKey =
@@ -14,7 +13,10 @@ export function MapSection() {
   }
 
   return (
-    <div className="h-[450px] overflow-hidden rounded-lg bg-white shadow-lg">
+    <motion.div
+      variants={fadeIn}
+      className="h-[450px] overflow-hidden rounded-lg bg-white shadow-lg"
+    >
       <iframe
         title="Ubicación del restaurante"
         width="100%"
@@ -25,6 +27,6 @@ export function MapSection() {
         referrerPolicy="no-referrer-when-downgrade"
         src={apiKey}
       />
-    </div>
+    </motion.div>
   );
 }

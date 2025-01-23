@@ -7,6 +7,11 @@ export function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith(path),
   );
 
+  const response = NextResponse.next();
+
+  // Add a cookie to indicate whether the page is public
+  response.cookies.set("isPublic", isPublic.toString());
+
   if (!isPublic) {
     const token = request.cookies.get("authToken");
     if (!token) {
@@ -17,7 +22,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {

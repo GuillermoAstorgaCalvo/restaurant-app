@@ -65,7 +65,7 @@ Reservation.init(
       allowNull: false,
       validate: {
         isDate: true,
-        isAfter: new Date().toISOString(), // Ensures date is in the future
+        isAfter: new Date().toISOString(),
       },
     },
 

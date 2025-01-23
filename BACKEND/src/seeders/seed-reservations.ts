@@ -10,8 +10,8 @@ import Reservation, { ReservationStatus } from "../models/reservation";
         date: new Date("2024-01-10T19:00:00"),
         guests: 4,
         status: "pendiente" as ReservationStatus,
-        created_at: new Date(), // Use snake_case
-        updated_at: new Date(), // Use snake_case
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         name: "Jane Smith",

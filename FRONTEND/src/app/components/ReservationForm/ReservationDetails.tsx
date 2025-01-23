@@ -26,7 +26,6 @@ export function ReservationDetails({
   const [timeSlots, setTimeSlots] = useState<string[]>([]);
   const { loading, error, getAvailability } = useAvailability();
 
-  // UseCallback to ensure stable reference of loadAvailability
   const loadAvailability = useCallback(async () => {
     try {
       const availability = await getAvailability(formData.date);
@@ -44,7 +43,7 @@ export function ReservationDetails({
     if (formData.date) {
       loadAvailability();
     }
-  }, [formData.date, loadAvailability]); // Include loadAvailability as a dependency
+  }, [formData.date, loadAvailability]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

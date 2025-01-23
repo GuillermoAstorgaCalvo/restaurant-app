@@ -1,13 +1,12 @@
 import { Op } from "sequelize";
 import { Reservation } from "../../models/reservation";
 
-// Configuración de horas pico
 const PEAK_HOURS = {
-  lunch: { start: 14, end: 15 }, // 14:00 - 15:00
-  dinner: { start: 21, end: 22 }, // 21:00 - 22:00
+  lunch: { start: 14, end: 15 },
+  dinner: { start: 21, end: 22 },
 };
 
-const MAX_SIMULTANEOUS_ARRIVALS = 3; // Máximo de llegadas simultáneas en el mismo intervalo
+const MAX_SIMULTANEOUS_ARRIVALS = 3;
 
 export async function validatePeakHours(date: Date) {
   const hour = date.getHours();
@@ -17,7 +16,6 @@ export async function validatePeakHours(date: Date) {
     hour >= PEAK_HOURS.dinner.start && hour < PEAK_HOURS.dinner.end;
 
   if (isPeakLunch || isPeakDinner) {
-    // Verificar reservas en el mismo intervalo de 15 minutos
     const intervalStart = new Date(date);
     intervalStart.setMinutes(Math.floor(date.getMinutes() / 15) * 15, 0, 0);
 

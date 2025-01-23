@@ -1,6 +1,5 @@
 import NodeCache from "node-cache";
 
-// Cache con expiración de 5 minutos
 const cache = new NodeCache({ stdTTL: 300 });
 
 export const cacheKeys = {

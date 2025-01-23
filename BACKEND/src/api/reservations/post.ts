@@ -6,7 +6,6 @@ export const createReservation: RequestHandler = async (req, res) => {
   try {
     const { name, email, phone, date, guests } = req.body;
 
-    // Check for required fields
     if (!name?.trim() || !email?.trim() || !phone?.trim() || !date || !guests) {
       return res
         .status(400)
@@ -15,7 +14,6 @@ export const createReservation: RequestHandler = async (req, res) => {
 
     const reservationDate = new Date(date);
 
-    // Run all validations
     const validationResult = await validateAllBusinessRules(
       reservationDate,
       email.trim(),
@@ -28,7 +26,6 @@ export const createReservation: RequestHandler = async (req, res) => {
       return res.status(400).json({ error: validationResult.error });
     }
 
-    // Create the reservation
     const newReservation = await Reservation.create({
       name: name.trim(),
       email: email.trim().toLowerCase(),

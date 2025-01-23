@@ -33,9 +33,11 @@ export default function MenuPage() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="container py-24">
-      <h1 className="text-center text-4xl font-bold">Menú</h1>
-      <MenuList groupedItems={groupedMenuItems} />
+    <div className="relative min-h-screen bg-white">
+      <div className="relative container mx-auto py-24">
+        <h1 className="text-center text-5xl font-bold text-gray-800">Menú</h1>
+        <MenuList groupedItems={groupedMenuItems} />
+      </div>
     </div>
   );
 }

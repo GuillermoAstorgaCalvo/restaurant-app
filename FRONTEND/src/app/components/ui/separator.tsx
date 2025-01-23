@@ -2,7 +2,7 @@ import { cn } from "@/app/lib/utils";
 import { HTMLAttributes } from "react";
 
 interface SeparatorProps extends HTMLAttributes<HTMLDivElement> {
-  orientation?: "horizontal" | "vertical";
+  readonly orientation?: "horizontal" | "vertical";
 }
 
 export function Separator({

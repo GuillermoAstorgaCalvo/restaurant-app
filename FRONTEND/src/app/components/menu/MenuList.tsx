@@ -1,10 +1,10 @@
 "use client";
 
-import { MenuItem } from "@/app/api/menu/menu";
+import { MenuItem } from "@/app/types/index";
 import { MenuItemCard } from "./MenuItemCard";
 
 interface MenuListProps {
-  readonly groupedItems: Record<string, MenuItem[]>; // Use grouped menu items type
+  readonly groupedItems: Record<string, MenuItem[]>;
 }
 
 export function MenuList({ groupedItems }: MenuListProps) {

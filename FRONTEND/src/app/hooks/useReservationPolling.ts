@@ -3,7 +3,7 @@ import { reservationsApi } from "../api/reservations/reservations";
 import { Reservation } from "@/app/types/reservation";
 import { useReservationCache } from "./useReservationCache";
 
-const POLLING_INTERVAL = 30000; // 30 segundos
+const POLLING_INTERVAL = 30000;
 
 export function useReservationPolling(reservationId?: number) {
   const [reservation, setReservation] = useState<Reservation | null>(null);
@@ -18,7 +18,6 @@ export function useReservationPolling(reservationId?: number) {
       setLoading(true);
       setError(null);
 
-      // Intentar obtener del caché primero
       const cached = getCached(reservationId);
       if (cached) {
         setReservation(cached);

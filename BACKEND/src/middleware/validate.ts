@@ -5,9 +5,9 @@ import { ValidationError } from "../lib/errors";
 export const validate = (schema: ZodSchema): RequestHandler => {
   return (req, res, next) => {
     schema
-      .parseAsync(req.body) // Pass only req.body for validation
+      .parseAsync(req.body)
       .then((validated) => {
-        req.body = validated; // Replace req.body with validated data
+        req.body = validated;
         next();
       })
       .catch((error) => {

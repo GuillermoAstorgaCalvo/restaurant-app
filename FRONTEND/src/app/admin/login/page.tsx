@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { loginAdmin } from "@/app/api/admin/login"; // Import loginAdmin function
+import { loginAdmin } from "@/app/api/admin/login";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState<string>("");
@@ -15,19 +15,16 @@ const AdminLogin = () => {
     setError("");
 
     try {
-      // Use loginAdmin function to handle the login process
       const response = await loginAdmin(email, password);
 
-      // Save the token in localStorage (or cookies)
       localStorage.setItem("token", response.token);
 
-      // Redirect to the dashboard after successful login
       router.push("/admin/dashboard");
     } catch (err: unknown) {
       if (err instanceof Error) {
-        setError(err.message); // Display the error message from loginAdmin
+        setError(err.message);
       } else {
-        setError("An unexpected error occurred.");
+        setError("Algo ha salido mal. Por favor, inténtalo de nuevo.");
       }
     }
   };
@@ -42,7 +39,9 @@ const AdminLogin = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="p-8 bg-white shadow-md rounded-md w-full max-w-md">
-        <h1 className="text-2xl font-bold text-center mb-4">Admin Login</h1>
+        <h1 className="text-2xl font-bold text-center mb-4">
+          Inicio de sesión
+        </h1>
         {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
         <form onSubmit={handleLogin}>
           <div className="mb-4">
@@ -54,8 +53,8 @@ const AdminLogin = () => {
               id="email"
               value={email}
               onChange={(e) => handleInputChange(e, setEmail)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-              placeholder="Enter your email"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 bg-white text-black"
+              placeholder="Introduce tu email"
               required
             />
           </div>
@@ -64,15 +63,15 @@ const AdminLogin = () => {
               className="block text-sm font-medium mb-1"
               htmlFor="password"
             >
-              Password
+              Contraseña
             </label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => handleInputChange(e, setPassword)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-              placeholder="Enter your password"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 bg-white text-black"
+              placeholder="Introduce tu contraseña"
               required
             />
           </div>
@@ -80,7 +79,7 @@ const AdminLogin = () => {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none"
           >
-            Login
+            Iniciar Sesión
           </button>
         </form>
       </div>

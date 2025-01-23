@@ -1,11 +1,10 @@
 import sequelize from "../lib/sequelize";
-import "../models/menu"; // Import to register the model
-import "../models/reservation"; // Import to register the model
+import "../models/menu";
+import "../models/reservation";
 
 (async () => {
   try {
-    // Sync all models
-    await sequelize.sync({ force: true }); // `force: true` drops and recreates tables
+    await sequelize.sync({ force: true });
   } catch (error) {
   } finally {
     await sequelize.close();

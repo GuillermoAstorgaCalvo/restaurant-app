@@ -11,8 +11,8 @@ import { Reservation } from "@/app/types/reservation";
 interface TimePickerProps {
   readonly value?: string;
   readonly onChange: (time: string) => void;
-  readonly date: Date; // Add `date` prop
-  readonly reservations: Reservation[]; // Add `reservations` prop
+  readonly date: Date;
+  readonly reservations: Reservation[];
 }
 
 export function TimePicker({
@@ -21,7 +21,7 @@ export function TimePicker({
   date,
   reservations,
 }: TimePickerProps) {
-  const timeSlots = generateTimeSlots(date, reservations); // Pass arguments here
+  const timeSlots = generateTimeSlots(date, reservations);
 
   return (
     <Select value={value} onValueChange={onChange}>

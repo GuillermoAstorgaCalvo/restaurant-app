@@ -39,6 +39,6 @@ export function isValidReservationTime(date: Date): boolean {
 export function combineDateAndTime(date: Date, time: string): string {
   const [hours, minutes] = time.split(":").map(Number);
   const combinedDate = new Date(date);
-  combinedDate.setHours(hours, minutes, 0, 0); // Combine date and time
-  return combinedDate.toISOString(); // Ensure ISO format
+  combinedDate.setHours(hours, minutes, 0, 0);
+  return combinedDate.toISOString();
 }

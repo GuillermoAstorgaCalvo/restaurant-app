@@ -1,4 +1,3 @@
-// Container animations
 export const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {

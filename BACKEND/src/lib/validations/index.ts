@@ -49,12 +49,10 @@ export async function validateAllBusinessRules(
       await validateTableCapacity(guests),
     ];
 
-    // Verificar validaciones básicas
     for (const validation of validations) {
       if (!validation.valid) return validation;
     }
 
-    // 2. Validaciones de negocio
     const businessValidations: Promise<ValidationResult>[] = [
       validateReservationLimits(email, phone),
       validateGroupSize(date, guests),
@@ -63,13 +61,11 @@ export async function validateAllBusinessRules(
       validatePeakHours(date),
     ];
 
-    // Ejecutar validaciones de negocio en paralelo
     const results = await Promise.all(businessValidations);
     for (const result of results) {
       if (!result.valid) return result;
     }
 
-    // 3. Validaciones estacionales y especiales
     const seasonalValidation = validateSeasonalRules(date, guests);
     if (!seasonalValidation.valid) return seasonalValidation;
 

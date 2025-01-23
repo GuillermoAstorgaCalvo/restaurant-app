@@ -7,8 +7,8 @@ interface ValidationError {
 }
 
 interface Props {
-  errors: ValidationError[];
-  onDismiss?: (field: string) => void;
+  readonly errors: ValidationError[];
+  readonly onDismiss?: (field: string) => void;
 }
 
 export function ValidationErrors({ errors, onDismiss }: Props) {

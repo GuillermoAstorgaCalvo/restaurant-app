@@ -1,5 +1,4 @@
 export function validateContactInfo(email: string, phone: string) {
-  // Validación de email
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   if (!emailRegex.test(email)) {
     return {
@@ -8,7 +7,6 @@ export function validateContactInfo(email: string, phone: string) {
     };
   }
 
-  // Validación de teléfono internacional
   const phoneRegex =
     /^(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{3,4})$/;
   const cleanPhone = phone.replace(/\s+/g, "");
@@ -46,7 +44,6 @@ export function validateName(name: string) {
     };
   }
 
-  // Verificar que solo contenga letras, espacios y algunos caracteres especiales
   const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s'-]+$/;
   if (!nameRegex.test(name)) {
     return {
