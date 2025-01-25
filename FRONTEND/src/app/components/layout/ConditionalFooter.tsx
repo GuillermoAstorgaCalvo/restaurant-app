@@ -7,11 +7,11 @@ export function ConditionalFooter() {
   const pathname = usePathname();
 
   // Routes where the footer should NOT appear
-  const excludedFooterRoutes = ["/admin/dashboard"];
+  const excludedFooterRoutes = ["/admin/dashboard", "/admin/login"];
 
   // Check if the current route starts with any of the excluded routes
   const shouldRenderFooter = !excludedFooterRoutes.some((route) =>
-    pathname.startsWith(route),
+    pathname.startsWith(route)
   );
 
   if (!shouldRenderFooter) return null;

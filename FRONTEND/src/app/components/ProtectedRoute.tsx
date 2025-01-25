@@ -41,7 +41,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }, [router]);
 
   if (isAuthenticated === null) {
-    return <div>Loading...</div>;
+    return <div>Cargando...</div>;
   }
 
   return <>{isAuthenticated && children}</>;

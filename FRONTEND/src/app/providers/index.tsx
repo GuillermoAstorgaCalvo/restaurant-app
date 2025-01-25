@@ -1,19 +1,10 @@
 "use client";
 
-import { ThemeProvider } from "next-themes";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "@/app/components/ui/toaster";
 import { SessionProvider } from "next-auth/react";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60 * 1000,
-      retry: 1,
-    },
-  },
-});
+import { queryClient } from "@/app/lib/queryOptions";
 
 interface ProvidersProps {
   readonly children: React.ReactNode;
@@ -30,10 +21,10 @@ export function Providers({
       session={sessionRequired ? undefined : null}
     >
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        {children}
+
+        <Toaster />
+
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </SessionProvider>
