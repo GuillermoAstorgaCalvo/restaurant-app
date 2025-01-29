@@ -3,7 +3,7 @@ import MenuItem from "../../models/menu";
 
 export const deleteMenuItem: RequestHandler = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
 
     if (!id || !Number.isInteger(Number(id))) {
       return res.status(400).json({ message: "Invalid menu item ID." });

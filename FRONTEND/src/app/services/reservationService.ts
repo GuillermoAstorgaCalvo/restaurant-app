@@ -12,18 +12,48 @@ export async function fetchReservations(): Promise<Reservation[]> {
 
 export async function updateReservationStatus(
   id: number,
-  status: ReservationStatus,
+  status: ReservationStatus
 ): Promise<void> {
-  await api.put(
-    `/reservations/${id}`,
-    { status },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    },
-  );
+  try {
+    await api.put(
+      `/reservations/status/${id}`,
+      { status },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (error) {
+    console.error("Error updating reservation status:", error);
+    throw error;
+  }
 }
+
+export const updateReservation = async (
+  updatedReservation: Reservation
+): Promise<Reservation> => {
+  try {
+    const { data } = await api.put<Reservation>(
+      `/reservations/${updatedReservation.id}`,
+      updatedReservation
+    );
+    return data;
+  } catch (error) {
+    console.error("Error updating reservation:", error);
+    throw error;
+  }
+};
+
+export const cancelReservation = async (id: number): Promise<void> => {
+  try {
+    await api.post("/reservations/cancel", { id });
+  } catch (error) {
+    console.error(`Error canceling reservation with ID ${id}:`, error);
+    throw error;
+  }
+};
 
 export async function deleteReservation(id: number): Promise<void> {
   await api.delete("/reservations", {

@@ -9,6 +9,6 @@ const menuRouter = Router();
 menuRouter.get("/", getMenuItems);
 menuRouter.post("/", createMenuItem);
 menuRouter.put("/:id", updateMenuItem);
-menuRouter.delete("/", deleteMenuItem);
+menuRouter.delete("/:id", deleteMenuItem);
 
 export default menuRouter;

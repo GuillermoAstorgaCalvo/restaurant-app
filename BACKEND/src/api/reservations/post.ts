@@ -1,6 +1,8 @@
 import { RequestHandler } from "express";
 import Reservation from "../../models/reservation";
-import { validateAllBusinessRules } from "@/lib/validations/index";
+import { validateAllBusinessRules } from "@/lib/validations";
+import { sendEmail } from "@/lib/utils/emailService";
+import { confirmationEmailTemplate } from "@/lib/utils/emailTemplates/confirmationEmailTemplate";
 
 export const createReservation: RequestHandler = async (req, res) => {
   try {
@@ -19,7 +21,7 @@ export const createReservation: RequestHandler = async (req, res) => {
       email.trim(),
       phone.trim(),
       guests,
-      name.trim(),
+      name.trim()
     );
 
     if (!validationResult.valid) {
@@ -33,6 +35,18 @@ export const createReservation: RequestHandler = async (req, res) => {
       date: reservationDate,
       guests,
       status: "pendiente",
+    });
+
+    await sendEmail({
+      to: email.trim(),
+      subject: "Confirmación de Reserva",
+      html: confirmationEmailTemplate(
+        name.trim(),
+        email.trim(),
+        phone.trim(),
+        reservationDate.toLocaleString(),
+        guests
+      ),
     });
 
     res.status(201).json(newReservation);

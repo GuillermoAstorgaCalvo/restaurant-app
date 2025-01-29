@@ -1,4 +1,4 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../lib/sequelize";
 
 export type ReservationStatus =
@@ -8,7 +8,7 @@ export type ReservationStatus =
   | "cancelada";
 
 interface ReservationAttributes {
-  id?: number;
+  id: number;
   name: string;
   email: string;
   phone: string;
@@ -19,8 +19,12 @@ interface ReservationAttributes {
   updatedAt?: Date;
 }
 
+// Optional fields for creating a new reservation
+interface ReservationCreationAttributes
+  extends Optional<ReservationAttributes, "id"> {}
+
 export class Reservation
-  extends Model<ReservationAttributes>
+  extends Model<ReservationAttributes, ReservationCreationAttributes>
   implements ReservationAttributes
 {
   public id!: number;
@@ -68,7 +72,6 @@ Reservation.init(
         isAfter: new Date().toISOString(),
       },
     },
-
     guests: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -81,7 +84,7 @@ Reservation.init(
         "pendiente",
         "confirmada",
         "finalizada",
-        "cancelada",
+        "cancelada"
       ),
       allowNull: false,
       defaultValue: "pendiente",
@@ -92,7 +95,10 @@ Reservation.init(
     tableName: "reservations",
     timestamps: true,
     underscored: true,
-  },
+    hooks: {
+      // Add any hooks if needed
+    },
+  }
 );
 
 export default Reservation;

@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import {
   fetchReservations,
   updateReservationStatus,
+  updateReservation,
   deleteReservation,
+  cancelReservation,
 } from "@/app/services/reservationService";
 import { Reservation, ReservationStatus } from "@/app/types/reservation";
 import ReservationEditForm from "@/app/components/admin/ReservationEditForm";
@@ -31,17 +33,28 @@ const ReservationManagement = () => {
 
   const handleStatusUpdate = async (
     id: number,
-    newStatus: ReservationStatus,
+    newStatus: ReservationStatus
   ) => {
     try {
       await updateReservationStatus(id, newStatus);
       setReservations((prev) =>
-        prev.map((res) =>
-          res.id === id ? { ...res, status: newStatus } : res,
-        ),
+        prev.map((res) => (res.id === id ? { ...res, status: newStatus } : res))
       );
     } catch (error) {
       console.error("Error updating status:", error);
+    }
+  };
+
+  const handleCancel = async (id: number) => {
+    try {
+      await cancelReservation(id);
+      setReservations((prev) =>
+        prev.map((res) =>
+          res.id === id ? { ...res, status: "cancelada" } : res
+        )
+      );
+    } catch (error) {
+      console.error("Error canceling reservation:", error);
     }
   };
 
@@ -51,7 +64,6 @@ const ReservationManagement = () => {
       setReservations((prev) => prev.filter((res) => res.id !== id));
     } catch (error) {
       console.error("Error deleting reservation:", error);
-      alert("Failed to delete reservation. Please try again.");
     }
   };
 
@@ -65,15 +77,21 @@ const ReservationManagement = () => {
 
   const handleSave = async (updatedReservation: Reservation) => {
     try {
-      await updateReservationStatus(
-        updatedReservation.id,
-        updatedReservation.status,
-      );
+      const formattedReservation = {
+        ...updatedReservation,
+        date: updatedReservation.date
+          ? new Date(updatedReservation.date).toISOString()
+          : "",
+      };
+
+      console.log("Payload being sent to backend:", formattedReservation);
+
+      const updatedData = await updateReservation(formattedReservation);
+
       setReservations((prev) =>
-        prev.map((res) =>
-          res.id === updatedReservation.id ? updatedReservation : res,
-        ),
+        prev.map((res) => (res.id === updatedData.id ? updatedData : res))
       );
+
       closeEditForm();
     } catch (error) {
       console.error("Error updating reservation:", error);
@@ -94,7 +112,7 @@ const ReservationManagement = () => {
   };
 
   const filteredReservations = reservations.filter((res) =>
-    filter ? res.status === filter : true,
+    filter ? res.status === filter : true
   );
 
   return (
@@ -148,7 +166,7 @@ const ReservationManagement = () => {
                   <td className="p-3 text-center">
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusClass(
-                        reservation.status,
+                        reservation.status
                       )}`}
                     >
                       {reservation.status}
@@ -165,9 +183,7 @@ const ReservationManagement = () => {
                     </button>
                     <button
                       className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition text-sm"
-                      onClick={() =>
-                        handleStatusUpdate(reservation.id, "cancelada")
-                      }
+                      onClick={() => handleCancel(reservation.id)}
                     >
                       Cancelar
                     </button>
@@ -194,7 +210,7 @@ const ReservationManagement = () => {
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
               <ReservationEditForm
                 reservation={editingReservation}
-                onSave={handleSave}
+                onSave={(updatedData) => handleSave(updatedData)}
                 onClose={closeEditForm}
               />
             </div>

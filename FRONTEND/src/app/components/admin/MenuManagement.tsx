@@ -26,40 +26,27 @@ export default function AdminMenuManagement() {
   }, []);
 
   const handleAddMenuItem = async (newItem: Omit<MenuItem, "id">) => {
-    const addedItem = await addMenuItem(newItem);
-    setGroupedItems((prev) => ({
-      ...prev,
-      [addedItem.category]: [...(prev[addedItem.category] || []), addedItem],
-    }));
+    await addMenuItem(newItem);
+    const groupedItems = await fetchMenuGroupedByCategory();
+    setGroupedItems(groupedItems);
     setIsAdding(false);
   };
 
   const handleEditMenuItem = async (
     id: string,
-    updatedItem: Omit<MenuItem, "id">,
+    updatedItem: Omit<MenuItem, "id">
   ) => {
-    const updated = await updateMenuItem(id, updatedItem);
-    setGroupedItems((prev) => {
-      const updatedGroupedItems = { ...prev };
-      const categoryItems = updatedGroupedItems[updated.category] || [];
-      updatedGroupedItems[updated.category] = categoryItems.map((item) =>
-        item.id === id ? updated : item,
-      );
-      return updatedGroupedItems;
-    });
+    await updateMenuItem(id, updatedItem);
+    const groupedItems = await fetchMenuGroupedByCategory();
+    setGroupedItems(groupedItems);
     setEditingItem(null);
   };
 
-  const handleDeleteMenuItem = async (id: string, category: string) => {
+  const handleDeleteMenuItem = async (id: string) => {
     try {
       await deleteMenuItem(id);
-      setGroupedItems((prev) => {
-        const updatedGroupedItems = { ...prev };
-        updatedGroupedItems[category] = updatedGroupedItems[category].filter(
-          (item) => item.id !== id,
-        );
-        return updatedGroupedItems;
-      });
+      const groupedItems = await fetchMenuGroupedByCategory();
+      setGroupedItems(groupedItems);
     } catch (error) {
       console.error("Failed to delete menu item:", error);
     }

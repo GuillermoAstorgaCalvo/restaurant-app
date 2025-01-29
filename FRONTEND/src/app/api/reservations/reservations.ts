@@ -26,7 +26,7 @@ export const reservationsApi = {
     try {
       const { data } = await api.post<Reservation>(
         "/reservations",
-        reservation,
+        reservation
       );
       return data;
     } catch (error) {
@@ -49,9 +49,19 @@ export const reservationsApi = {
 
   delete: async (id: number): Promise<void> => {
     try {
-      await api.delete(`/reservations/${id}`);
+      await api.delete("/reservations", {
+        data: { id },
+      });
     } catch (error) {
       console.error(`Error deleting reservation with ID ${id}:`, error);
+      throw error;
+    }
+  },
+  cancel: async (id: number): Promise<void> => {
+    try {
+      await api.post("/reservations/cancel", { id });
+    } catch (error) {
+      console.error(`Error canceling reservation with ID ${id}:`, error);
       throw error;
     }
   },
