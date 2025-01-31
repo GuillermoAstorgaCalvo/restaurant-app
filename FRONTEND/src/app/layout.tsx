@@ -1,29 +1,33 @@
 import { Inter } from "next/font/google";
-import { Providers } from "@/app/providers";
-import { Header } from "@/app/components/layout/header";
-import { Footer } from "@/app/components/layout/footer";
 import "@/app/styles/globals.css";
+import { Header } from "@/app/components/layout/header";
+import { ConditionalFooter } from "@/app/components/layout/ConditionalFooter";
+import { Providers } from "@/app/providers";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata = {
-  title: "La Maison - Restaurante",
-  description: "Alta cocina y reservas",
-} as const;
+  title: "Restaurante La Maison",
+  description: "Restaurante La Maison",
+};
 
-interface RootLayoutProps {
-  readonly children: React.ReactNode;
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="es" suppressHydrationWarning>
-      <body className={inter.className}>
+    <html
+      lang="es"
+      className={inter.className} // Lock the font class name
+      style={{ colorScheme: "light" }} // Lock color scheme to light
+    >
+      <body>
         <Providers>
           <div className="flex min-h-screen flex-col">
             <Header />
-            <main className="flex-1 pt-16">{children}</main>
-            <Footer />
+            <main className="flex-1 w-full pt-16">{children}</main>
+            <ConditionalFooter />
           </div>
         </Providers>
       </body>

@@ -3,12 +3,15 @@ import Reservation from "../../models/reservation";
 
 export const deleteReservation: RequestHandler = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.body;
+
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ message: "Invalid reservation ID." });
+    }
 
     const reservation = await Reservation.findByPk(id);
     if (!reservation) {
-      res.status(404).json({ message: "Reservation not found." });
-      return; // Finaliza el controlador aquí
+      return res.status(404).json({ message: "Reservation not found." });
     }
 
     await reservation.destroy();

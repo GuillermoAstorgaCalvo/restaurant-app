@@ -1,4 +1,3 @@
-// Hover animations
 export const hover = {
   scale: { scale: 1.05 },
   rotate: { rotate: 360 },

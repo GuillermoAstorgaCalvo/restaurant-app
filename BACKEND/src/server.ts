@@ -3,44 +3,46 @@ import dotenv from "dotenv";
 import cors from "cors";
 import menuRouter from "./api/menu";
 import reservationRouter from "./api/reservations";
+import adminRoutes from "./api/admin";
+import { errorHandler } from "./middleware/error-handler";
 
 dotenv.config();
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3001;
 
-// Enable CORS
-app.use(cors({ origin: "*" })); // Allows requests from any origin. Update this if you want stricter control.
+app.use(cors({ origin: "*", credentials: true }));
 
-// Middleware
 app.use(express.json());
 
-// Health Check Route
+app.use((req, res, next) => {
+  next();
+});
+
+app.use((req, res, next) => {
+  if (
+    req.method !== "GET" &&
+    req.headers["content-type"] !== "application/json"
+  ) {
+    return res
+      .status(400)
+      .json({ error: "Invalid Content-Type. Expected application/json" });
+  }
+  next();
+});
+
 app.get("/", (req, res) => {
   res.status(200).send("Servidor backend funcionando");
 });
 
-// API Routes
 app.use("/api/menu", menuRouter);
 app.use("/api/reservations", reservationRouter);
+app.use("/api/admin", adminRoutes);
 
-// Error Handling Middleware
-app.use(
-  (
-    err: any,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => {
-    console.error("Error encountered:", err.message || err);
-    res.status(err.status || 500).json({
-      error: "An unexpected error occurred.",
-      message: err.message || "Internal Server Error",
-    });
-  }
-);
+app.use(errorHandler);
 
-// Start the Server
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+export default app;
+
+if (require.main === module) {
+  app.listen(PORT, "0.0.0.0");
+}

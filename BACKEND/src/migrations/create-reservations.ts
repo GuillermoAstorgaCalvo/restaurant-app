@@ -8,15 +8,15 @@ export async function up(queryInterface: QueryInterface): Promise<void> {
       primaryKey: true,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(150),
       allowNull: false,
     },
     phone: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(15),
       allowNull: false,
     },
     date: {
@@ -32,17 +32,17 @@ export async function up(queryInterface: QueryInterface): Promise<void> {
         "pendiente",
         "confirmada",
         "finalizada",
-        "cancelada"
+        "cancelada",
       ),
       allowNull: false,
       defaultValue: "pendiente",
     },
-    createdAt: {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    updatedAt: {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,

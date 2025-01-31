@@ -1,18 +1,21 @@
-# Usa la última versión LTS de Node.js
+# Use a Node.js base image
 FROM node:22-slim
 
-# Configura el directorio de trabajo
+# Set the working directory
 WORKDIR /usr/src/app
 
-# Instala las dependencias de frontend
+# Copy package.json and package-lock.json
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
-# Copia el código del frontend
+# Copy the application code
 COPY . .
 
-# Expone el puerto 3000
+# Expose the default Next.js port
 EXPOSE 3000
+EXPOSE 9241
 
-# Comando de inicio
+# Command to start the app
 CMD ["npm", "run", "dev"]

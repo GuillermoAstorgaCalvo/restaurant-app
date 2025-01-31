@@ -3,7 +3,6 @@ import {
   RESTAURANT_NAME,
   RESTAURANT_ADDRESS,
   RESTAURANT_CITY,
-  RESTAURANT_STATE,
   RESTAURANT_ZIP,
   RESTAURANT_PHONE,
   BUSINESS_HOURS,
@@ -31,7 +30,7 @@ export function Footer() {
             <address className="not-italic text-muted-foreground">
               <p>{RESTAURANT_ADDRESS}</p>
               <p>
-                {RESTAURANT_CITY}, {RESTAURANT_STATE} {RESTAURANT_ZIP}
+                {RESTAURANT_CITY}, {RESTAURANT_ZIP}
               </p>
               <p>Teléfono: {RESTAURANT_PHONE}</p>
             </address>

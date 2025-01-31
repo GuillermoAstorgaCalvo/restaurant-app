@@ -5,15 +5,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/components/ui/select";
-import { generateTimeSlots } from "@/app/lib/utils/date";
+import { generateTimeSlots } from "@/app/lib/utils/time-slots";
+import { Reservation } from "@/app/types/reservation";
 
 interface TimePickerProps {
   readonly value?: string;
   readonly onChange: (time: string) => void;
+  readonly date: Date;
+  readonly reservations: Reservation[];
 }
 
-export function TimePicker({ value, onChange }: TimePickerProps) {
-  const timeSlots = generateTimeSlots();
+export function TimePicker({
+  value,
+  onChange,
+  date,
+  reservations,
+}: TimePickerProps) {
+  const timeSlots = generateTimeSlots(date, reservations);
 
   return (
     <Select value={value} onValueChange={onChange}>

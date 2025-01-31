@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { fadeInUp, scaleUp, transitions } from "@/app/animations";
+import { fadeInUp, scaleUp, transitions } from "@/app/animations/index";
 
 export function Hero() {
   return (
-    <div className="relative h-[600px] w-full">
+    <div suppressHydrationWarning className="relative h-[600px] w-full">
       <Image
         src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0"
         alt="Interior del restaurante"

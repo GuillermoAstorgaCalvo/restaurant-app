@@ -1,4 +1,3 @@
-// Item-specific animations
 export const featureItem = {
   hidden: { opacity: 0, y: 20 },
   visible: {

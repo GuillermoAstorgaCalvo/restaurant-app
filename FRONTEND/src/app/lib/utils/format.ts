@@ -1,8 +1,6 @@
 export function formatPhoneNumber(value: string): string {
-  // Remove all non-numeric characters
   const numbers = value.replace(/\D/g, "");
 
-  // Format as XXX-XXX-XXXX
   if (numbers.length <= 3) {
     return numbers;
   } else if (numbers.length <= 6) {
@@ -15,11 +13,8 @@ export function formatPhoneNumber(value: string): string {
   }
 }
 
-export function formatPrice(price: number): string {
-  return new Intl.NumberFormat("es-ES", {
-    style: "currency",
-    currency: "EUR",
-  }).format(price);
+export function formatEuro(amount: number): string {
+  return `${amount.toFixed(2)} €`;
 }
 
 export function formatDate(date: Date): string {

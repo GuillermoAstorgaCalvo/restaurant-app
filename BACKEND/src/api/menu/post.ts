@@ -20,7 +20,6 @@ export const createMenuItem: RequestHandler = async (req, res) => {
 
     res.status(201).json(menuItem);
   } catch (error) {
-    console.error("Error creating menu item:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

@@ -1,12 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchMenuGroupedByCategory, GroupedMenuItems } from "@/app/api/menu";
+import {
+  fetchMenuGroupedByCategory,
+  GroupedMenuItems,
+} from "@/app/api/menu/menu";
 import { MenuList } from "@/app/components/menu/MenuList";
+import { motion } from "framer-motion";
+import { fadeInContainer } from "@/app/animations";
 
 export default function MenuPage() {
   const [groupedMenuItems, setGroupedMenuItems] = useState<GroupedMenuItems>(
-    {},
+    {}
   );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,9 +35,16 @@ export default function MenuPage() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="container py-24">
-      <h1 className="text-center text-4xl font-bold">Menú</h1>
-      <MenuList groupedItems={groupedMenuItems} />
-    </div>
+    <motion.div
+      className="relative min-h-screen bg-white"
+      initial="hidden"
+      animate="visible"
+      variants={fadeInContainer}
+    >
+      <div className="relative container mx-auto py-24">
+        <h1 className="text-center text-5xl font-bold text-gray-800">Menú</h1>
+        <MenuList groupedItems={groupedMenuItems} />
+      </div>
+    </motion.div>
   );
 }

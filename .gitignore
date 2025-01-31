@@ -14,6 +14,13 @@ FRONTEND/!.yarn/versions
 
 # testing
 FRONTEND/coverage
+BACKEND/coverage
+/tests/
+__tests__/
+*.test.*
+*.spec.*
+jest-cache/
+jest-config/
 
 # next.js
 FRONTEND/.next/
@@ -27,16 +34,23 @@ BACKEND/dist/
 # misc
 FRONTEND/.DS_Store
 FRONTEND/*.pem
+.DS_Store
+*.pem
 
 # debug
 FRONTEND/npm-debug.log*
 FRONTEND/yarn-debug.log*
 FRONTEND/yarn-error.log*
 FRONTEND/.pnpm-debug.log*
+BACKEND/npm-debug.log*
+BACKEND/yarn-debug.log*
+BACKEND/yarn-error.log*
+BACKEND/.pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
 FRONTEND/.env*
 BACKEND/.env*
+/.env
 
 # vercel
 FRONTEND/.vercel
@@ -46,3 +60,4 @@ FRONTEND/*.tsbuildinfo
 BACKEND/*.tsbuildinfo
 FRONTEND/next-env.d.ts
 BACKEND/next-env.d.ts
+*.tsbuildinfo

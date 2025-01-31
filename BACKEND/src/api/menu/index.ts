@@ -6,9 +6,9 @@ import { deleteMenuItem } from "./delete";
 
 const menuRouter = Router();
 
-menuRouter.get("/", getMenuItems); // GET /api/menu
-menuRouter.post("/", createMenuItem); // POST /api/menu
-menuRouter.put("/:id", updateMenuItem); // PUT /api/menu/:id
-menuRouter.delete("/:id", deleteMenuItem); // DELETE /api/menu/:id
+menuRouter.get("/", getMenuItems);
+menuRouter.post("/", createMenuItem);
+menuRouter.put("/:id", updateMenuItem);
+menuRouter.delete("/:id", deleteMenuItem);
 
 export default menuRouter;

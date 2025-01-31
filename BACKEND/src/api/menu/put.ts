@@ -15,7 +15,6 @@ export const updateMenuItem: RequestHandler = async (req, res) => {
     await menuItem.update({ name, description, price, imageUrl, category });
     res.status(200).json(menuItem);
   } catch (error) {
-    console.error("Error updating menu item:", error);
     res.status(500).json({ error: "Failed to update menu item." });
   }
 };

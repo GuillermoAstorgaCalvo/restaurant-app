@@ -1,4 +1,32 @@
+# Node.js dependencies
 node_modules
-.next
+
+# Next.js build files
+FRONTEND/.next
+FRONTEND/out
+
+# Logs and debug files
 *.log
+
+# Environment files
 .env
+FRONTEND/.env*
+BACKEND/.env*
+
+# Testing files
+coverage/
+tests/
+__tests__/
+*.test.*
+*.spec.*
+jest-cache/
+jest-config/
+
+# Production builds
+FRONTEND/dist
+FRONTEND/build
+BACKEND/dist
+
+# Miscellaneous
+.DS_Store
+*.tsbuildinfo

@@ -1,12 +1,23 @@
+import type { NextPage } from "next";
+import type { AppProps } from "next/app";
+
+export type NextPageWithLayout = NextPage & {
+  getLayout?: (page: React.ReactNode) => React.ReactNode;
+};
+
+export type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
 export type Role = "ADMIN" | "STAFF" | "CUSTOMER";
 export type Status = "PENDING" | "CONFIRMED" | "CANCELLED";
-export type Category = "APPETIZER" | "MAIN" | "DESSERT" | "BEVERAGE";
+export type Category = "ENTRANTE" | "PRINCIPAL" | "POSTRE" | "BEBIDA";
 
 export const CategoryLabels: Record<Category, string> = {
-  APPETIZER: "Entrantes",
-  MAIN: "Platos Principales",
-  DESSERT: "Postres",
-  BEVERAGE: "Bebidas",
+  ENTRANTE: "Entrantes",
+  PRINCIPAL: "Platos Principales",
+  POSTRE: "Postres",
+  BEBIDA: "Bebidas",
 };
 
 export interface User {
@@ -50,8 +61,5 @@ export interface MenuItem {
   description: string;
   price: number;
   category: Category;
-  image: string;
-  available: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  imageUrl: string;
 }
