@@ -1,12 +1,6 @@
 import { Op } from "sequelize";
 import { Reservation } from "../../models/reservation";
-
-const PEAK_HOURS = {
-  lunch: { start: 14, end: 15 },
-  dinner: { start: 21, end: 22 },
-};
-
-const MAX_SIMULTANEOUS_ARRIVALS = 3;
+import { PEAK_HOURS, MAX_SIMULTANEOUS_ARRIVALS } from "@/config/restaurant";
 
 export async function validatePeakHours(date: Date) {
   const hour = date.getHours();

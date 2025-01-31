@@ -1,7 +1,6 @@
 import { Op } from "sequelize";
 import { Reservation } from "../../models/reservation";
-
-const MAX_ACTIVE_RESERVATIONS = 2;
+import { MAX_ACTIVE_RESERVATIONS } from "@/config/restaurant";
 
 export async function validateReservationLimits(email: string, phone: string) {
   const activeReservationsByEmail = await Reservation.count({

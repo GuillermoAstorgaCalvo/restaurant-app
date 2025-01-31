@@ -1,11 +1,4 @@
-const SPECIAL_DATES = new Set([
-  "2024-12-24",
-  "2024-12-25",
-  "2024-12-31",
-  "2025-01-01",
-]);
-
-const CLOSED_DATES = new Set(["2024-01-01", "2024-12-25"]);
+import { CLOSED_DATES, SPECIAL_DATES } from "@/config/restaurant";
 
 export function validateSpecialDates(date: Date) {
   const dateString = date.toISOString().split("T")[0];

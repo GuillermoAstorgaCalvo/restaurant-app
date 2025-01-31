@@ -1,7 +1,6 @@
-import { RESTAURANT_CONFIG } from "../../config/restaurant";
+import { RESTAURANT_CONFIG, MAX_ADVANCE_DAYS } from "../../config/restaurant";
 
 const MIN_ADVANCE_HOURS = RESTAURANT_CONFIG.minHoursInAdvance;
-const MAX_ADVANCE_DAYS = 30;
 
 export function validateReservationTime(date: Date): {
   valid: boolean;
@@ -9,7 +8,7 @@ export function validateReservationTime(date: Date): {
 } {
   const now = new Date();
   const minDateTime = new Date(
-    now.getTime() + MIN_ADVANCE_HOURS * 60 * 60 * 1000,
+    now.getTime() + MIN_ADVANCE_HOURS * 60 * 60 * 1000
   );
 
   if (date < now) {

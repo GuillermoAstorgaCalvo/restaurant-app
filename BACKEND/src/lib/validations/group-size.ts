@@ -1,8 +1,9 @@
 import { Op } from "sequelize";
 import { Reservation } from "../../models/reservation";
-
-const MIN_HOURS_ADVANCE_LARGE_GROUPS = 48;
-const MAX_LARGE_GROUPS_PER_DAY = 2;
+import {
+  MIN_HOURS_ADVANCE_LARGE_GROUPS,
+  MAX_LARGE_GROUPS_PER_DAY,
+} from "@/config/restaurant";
 
 export async function validateGroupSize(date: Date, guests: number) {
   if (guests >= 6) {

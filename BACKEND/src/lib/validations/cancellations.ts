@@ -1,8 +1,9 @@
 import { Op } from "sequelize";
 import { Reservation } from "../../models/reservation";
-
-const MAX_CANCELLATIONS_PER_MONTH = 3;
-const MIN_HOURS_FOR_CANCELLATION = 24;
+import {
+  MAX_CANCELLATIONS_PER_MONTH,
+  MIN_HOURS_FOR_CANCELLATION,
+} from "@/config/restaurant";
 
 export async function validateCancellationLimits(email: string) {
   const cancelationsThisMonth = await Reservation.count({

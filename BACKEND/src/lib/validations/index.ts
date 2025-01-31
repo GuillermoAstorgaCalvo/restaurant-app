@@ -35,10 +35,9 @@ export async function validateAllBusinessRules(
   email: string,
   phone: string,
   guests: number,
-  name: string,
+  name: string
 ): Promise<ValidationResult> {
   try {
-    // 1. Validaciones básicas
     const validations: ValidationResult[] = [
       validateContactInfo(email, phone),
       validateName(name),
