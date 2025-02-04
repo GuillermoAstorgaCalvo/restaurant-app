@@ -73,9 +73,9 @@ This project is a full-stack application for restaurants, designed to allow cust
 
    ```env
    # Backend Configuration
-   PORT=5000
+   PORT=3001
    DATABASE_URL=postgres://postgres:postgres@db:5432/restaurant_db
-   JWT_SECRET=your_secret_key
+   JWT_SECRET=OXT3in&u&+B9P.K%4ti!>1Ot*£F_<Z~n1SO60X*nh6U8pqD&
    ```
 
 3. Build and run the containers:
@@ -87,7 +87,7 @@ This project is a full-stack application for restaurants, designed to allow cust
 4. Access the services:
 
    - **Frontend**: `http://localhost:3000`
-   - **Backend**: `http://localhost:5000`
+   - **Backend**: `http://localhost:3001`
 
 ---
 
@@ -179,7 +179,7 @@ This project is a full-stack application for restaurants, designed to allow cust
    npm run dev
    ```
 
-6. Access the API at `http://localhost:5000`.
+6. Access the API at `http://localhost:3001`.
 
 ---
 
