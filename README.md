@@ -11,7 +11,7 @@ This project is a full-stack application for restaurants, designed to allow cust
 - **Dynamic Menu**: Displays categorized menu items.
 - **Reservation Form**: Allows users to book tables online.
 - **Responsive Design**: Optimized for mobile, tablet, and desktop.
-- **User Panel**: For managing reservations, orders, and favorites (to be implemented).
+- **Admin Panel**: For managing reservations and menu.
 
 ### Backend
 
@@ -33,23 +33,46 @@ This project is a full-stack application for restaurants, designed to allow cust
 ### Frontend
 
 - [Next.js](https://nextjs.org/) (v15.1.3)
-- [React](https://reactjs.org/) (v19)
+- [React](https://reactjs.org/) (v19.0.0)
 - [Tailwind CSS](https://tailwindcss.com/) (v3.4.17)
 - [TypeScript](https://www.typescriptlang.org/) (v5)
+- [Framer Motion](https://www.framer.com/motion/) (v11.15.0) - Animations
+- [Zod](https://zod.dev/) (v3.24.1) - Schema validation
+- [React Query](https://tanstack.com/query/latest) (v5.62.11) - Data fetching and caching
+- [NextAuth.js](https://next-auth.js.org/) (v4.24.11) - Authentication
+- [Radix UI](https://www.radix-ui.com/) - UI components (Select, Toast, Popover, etc.)
+- [Lucide Icons](https://lucide.dev/) (v0.469.0) - Icon library
+- [Sonner](https://sonner.dev/) (v1.7.1) - Toast notifications
+- [Class Variance Authority](https://cva.style/) (v0.7.1) - Variant-based styling
 
 ### Backend
 
 - [Express.js](https://expressjs.com/) (v4.21.2)
-- [PostgreSQL](https://www.postgresql.org/) with [Sequelize](https://sequelize.org/) ORM
-- [JWT](https://jwt.io/) for authentication
-- [bcryptjs](https://github.com/dcodeIO/bcrypt.js) for password hashing
-- [Dotenv](https://github.com/motdotla/dotenv) for environment configuration
+- [PostgreSQL](https://www.postgresql.org/) with [Sequelize](https://sequelize.org/) ORM (v6.37.1)
+- [JWT](https://jwt.io/) (v9.0.2) - Authentication
+- [bcrypt](https://github.com/kelektiv/node.bcrypt.js) (v5.1.1) - Password hashing
+- [Dotenv](https://github.com/motdotla/dotenv) (v16.4.7) - Environment configuration
+- [Node-Cache](https://github.com/node-cache/node-cache) (v5.1.2) - Caching
+- [Nodemailer](https://nodemailer.com/) (v6.10.0) - Email handling
+- [Zod](https://zod.dev/) (v3.24.1) - Schema validation
+- [CORS](https://github.com/expressjs/cors) (v2.8.5) - Cross-origin resource sharing
 
-### Deployment
+### Development & Tooling
 
-- Docker and Docker Compose
-- [Vercel](https://vercel.com/) for frontend deployment
-- [Heroku](https://www.heroku.com/) or AWS for backend
+- [ESLint](https://eslint.org/) (v9.17.0) - Code linting
+- [Prettier](https://prettier.io/) (v3.4.2) - Code formatting
+- [Jest](https://jestjs.io/) (v29.7.0) - Testing framework
+- [Supertest](https://github.com/ladjs/supertest) (v7.0.0) - HTTP testing
+- [TS-Node](https://typestrong.org/ts-node/) (v10.9.2) - Run TypeScript directly
+- [Nodemon](https://nodemon.io/) (v3.1.0) - Auto-reloading for development
+- [Sequelize CLI](https://sequelize.org/docs/v6/other-topics/migrations/) (v6.6.2) - Database migrations
+- [Docker](https://www.docker.com/) - Containerization
+
+### Dockerized Setup
+
+- **Frontend**: Runs Next.js with Tailwind CSS in an isolated container.
+- **Backend**: Node.js with PostgreSQL for data handling and APIs.
+- **PostgreSQL Database**: Pre-configured using Docker Compose.
 
 ---
 
@@ -69,19 +92,65 @@ This project is a full-stack application for restaurants, designed to allow cust
    cd restaurant-app
    ```
 
-2. Create a `.env` file in the root directory for environment variables. Example for backend:
+2. Create the `.env` files in the different directories for environment variables;
 
-   ```env
-   # Backend Configuration
-   PORT=3001
-   DATABASE_URL=postgres://postgres:postgres@db:5432/restaurant_db
-   JWT_SECRET=OXT3in&u&+B9P.K%4ti!>1Ot*£F_<Z~n1SO60X*nh6U8pqD&
-   ```
+# ==============================
+# 🌐 Frontend Environment Variables
+# Path: /frontend/.env
+# ==============================
+
+NEXT_PUBLIC_API_URL=http://localhost:3001/api
+
+# Google Maps API Key
+GOOGLE_MAPS_API_KEY=https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3198.347345280471!2d-4.43984538795598!3d36.71421837215608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f79dc085d749%3A0x9bebfdf2d91da2b5!2sMes%C3%B3n%20Astorga!5e0!3m2!1ses!2ses!4v1735598117900!5m2!1ses!2ses
+
+# ==============================
+# 🛠️ Backend Environment Variables
+# Path: /backend/.env
+# ==============================
+
+NODE_ENV=development
+PORT=3001
+
+# Database Configuration
+DB_HOST=postgres
+DB_PORT=5432
+DB_USER=restaurant_admin
+DB_PASSWORD=A!dminP@ss123
+DB_NAME=restaurant
+
+# Authentication
+JWT_SECRET=OXT3in&u&+B9P.K%4ti!>1Ot*£F_<Z~n1SO60X*nh6U8pqD&
+ADMIN_PASSWORD=v4vhyZ2ybBKp*yL*2%F22nrq40c^BKE!HNkkLkgyNq5VKVVy
+
+# Email Configuration
+EMAIL_USER=guillermoastorgacalvo@gmail.com
+EMAIL_PASSWORD=pqee kfsy ydcd eglj
+EMAIL_SERVICE=gmail
+
+# ==============================
+# 🐳 Root Environment Variables (Docker Compose)
+# Path: /.env
+# ==============================
+
+NODE_ENV=development
+
+# PostgreSQL Configuration
+DB_HOST=postgres
+DB_PORT=5432
+DB_USER=restaurant_admin
+DB_PASSWORD=A!dminP@ss123
+DB_NAME=restaurant
+
+# Docker Switch
+BACKEND_COMMAND=npm run dev
+FRONTEND_COMMAND=npm run dev
+
 
 3. Build and run the containers:
 
    ```bash
-   docker-compose up --build
+   docker:dev
    ```
 
 4. Access the services:
@@ -98,7 +167,6 @@ This project is a full-stack application for restaurants, designed to allow cust
 ├── /frontend/
 │   ├── /src/
 │   │   ├── /components  # Reusable components
-│   │   ├── /pages       # Next.js pages
 │   │   ├── /styles      # Global styles
 │   │   ├── /context     # Global state management
 │   │   └── /public      # Static files
