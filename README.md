@@ -82,7 +82,7 @@ This project is a full-stack application for restaurants, designed to allow cust
 
 1️⃣ Clone the repository:
 
-```bash
+bash:
 git clone https://github.com/GuillermoAstorgaCalvo/restaurant-app.git
 cd restaurant-app
 ```
@@ -91,7 +91,6 @@ cd restaurant-app
 
 #### 🌐 Frontend Environment Variables (`/frontend/.env`)
 
-```ini
 NEXT_PUBLIC_API_URL=http://localhost:3001/api
 
 # Google Maps API Key
@@ -143,7 +142,7 @@ FRONTEND_COMMAND=npm run dev
 3️⃣ Build and run the containers:
 
 ```bash
-docker-compose up --build
+"docker:dev": "node scripts/set-env.js dev && docker-compose up --build"
 ```
 
 4️⃣ Access the services:
