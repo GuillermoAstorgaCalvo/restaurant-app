@@ -34,6 +34,7 @@ This project is a full-stack application for restaurants, designed to allow cust
 
 - [Next.js](https://nextjs.org/) (v15.1.3)
 - [React](https://reactjs.org/) (v19.0.0)
+- [React](https://reactjs.org/) (v19.0.0)
 - [Tailwind CSS](https://tailwindcss.com/) (v3.4.17)
 - [TypeScript](https://www.typescriptlang.org/) (v5)
 - [Framer Motion](https://www.framer.com/motion/) (v11.15.0) – Animations
@@ -163,6 +164,8 @@ docker-compose up --build
 ```
 
 ---
+
+> > > > > > > origin/main
 
 ## 🖌️ License
 
