@@ -121,6 +121,25 @@ EMAIL_PASSWORD= contact me
 EMAIL_SERVICE=gmail
 ```
 
+# ==============================
+# 🐳 Root Environment Variables (Docker Compose)
+# Path: /.env
+# ==============================
+
+NODE_ENV=development
+
+# PostgreSQL Configuration
+DB_HOST=postgres
+DB_PORT=5432
+DB_USER=restaurant_admin
+DB_PASSWORD=A!dminP@ss123
+DB_NAME=restaurant
+
+# Docker Switch
+BACKEND_COMMAND=npm run dev
+FRONTEND_COMMAND=npm run dev
+```
+
 3️⃣ Build and run the containers:
 
 ```bash
