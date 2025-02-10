@@ -115,8 +115,8 @@ JWT_SECRET=OXT3in&u&+B9P.K%4ti!>1Ot*£F_<Z~n1SO60X*nh6U8pqD&
 ADMIN_PASSWORD=v4vhyZ2ybBKp*yL*2%F22nrq40c^BKE!HNkkLkgyNq5VKVVy
 
 # Email Configuration
-EMAIL_USER=guillermoastorgacalvo@gmail.com
-EMAIL_PASSWORD=pqee kfsy ydcd eglj
+EMAIL_USER= contact me
+EMAIL_PASSWORD= contact me
 EMAIL_SERVICE=gmail
 ```
 
