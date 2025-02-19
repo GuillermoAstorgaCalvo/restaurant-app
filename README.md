@@ -85,12 +85,12 @@ This project is a full-stack application for restaurants, designed to allow cust
 bash:
 git clone https://github.com/GuillermoAstorgaCalvo/restaurant-app.git
 cd restaurant-app
-```
 
 2️⃣ Create the `.env` files in different directories:
 
 #### 🌐 Frontend Environment Variables (`/frontend/.env`)
 
+```ini
 NEXT_PUBLIC_API_URL=http://localhost:3001/api
 
 # Google Maps API Key
@@ -124,7 +124,7 @@ EMAIL_SERVICE=gmail
 # 🐳 Root Environment Variables (Docker Compose)
 # Path: /.env
 # ==============================
-
+```ini
 NODE_ENV=development
 
 # PostgreSQL Configuration
