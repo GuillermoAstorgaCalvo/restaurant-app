@@ -1,21 +1,20 @@
-# Use a Node.js base image
-FROM node:22-slim
+# Use the official Node.js image as a base
+FROM node:16-alpine
 
-# Set the working directory
+# Set working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy package.json and package-lock.json first to install dependencies
+COPY ./package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --production
 
-# Copy the application code
+# Copy the rest of your application files
 COPY . .
 
-# Expose the default Next.js port
+# Expose the frontend port
 EXPOSE 3000
-EXPOSE 9241
 
-# Command to start the app
+# Start the frontend service
 CMD ["npm", "run", "production"]
