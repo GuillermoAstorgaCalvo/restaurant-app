@@ -8,7 +8,7 @@ export function validateSeasonalRules(date: Date, guests: number) {
   const dateString = date.toISOString().split("T")[0];
 
   const isHighSeason = SEASONS.high.some(
-    (period) => dateString >= period.start && dateString <= period.end
+    (period) => dateString >= period.start && dateString <= period.end,
   );
 
   if (isHighSeason) {
@@ -20,7 +20,7 @@ export function validateSeasonalRules(date: Date, guests: number) {
     }
 
     const daysInAdvance = Math.ceil(
-      (date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
+      (date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24),
     );
     if (daysInAdvance < MIN_ADVANCE_DAYS_HIGH_SEASON) {
       return {
@@ -31,7 +31,7 @@ export function validateSeasonalRules(date: Date, guests: number) {
   }
 
   const isLowSeason = SEASONS.low.some(
-    (period) => dateString >= period.start && dateString <= period.end
+    (period) => dateString >= period.start && dateString <= period.end,
   );
 
   if (isLowSeason) {

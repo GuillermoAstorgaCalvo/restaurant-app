@@ -8,7 +8,7 @@ export function validateReservationTime(date: Date): {
 } {
   const now = new Date();
   const minDateTime = new Date(
-    now.getTime() + MIN_ADVANCE_HOURS * 60 * 60 * 1000
+    now.getTime() + MIN_ADVANCE_HOURS * 60 * 60 * 1000,
   );
 
   if (date < now) {

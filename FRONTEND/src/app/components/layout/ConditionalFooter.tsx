@@ -11,7 +11,7 @@ export function ConditionalFooter() {
 
   // Check if the current route starts with any of the excluded routes
   const shouldRenderFooter = !excludedFooterRoutes.some((route) =>
-    pathname.startsWith(route)
+    pathname.startsWith(route),
   );
 
   if (!shouldRenderFooter) return null;

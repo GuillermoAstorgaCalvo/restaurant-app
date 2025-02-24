@@ -10,12 +10,13 @@ services:
     volumes:
       - ./BACKEND:/usr/src/app
       - /usr/src/app/node_modules
-    command: ${BACKEND_COMMAND:-npm run dev}
+    command: ${BACKEND_COMMAND:-npm run production}
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       - app-network
+    restart: always
 
   frontend:
     build:
@@ -29,7 +30,7 @@ services:
     volumes:
       - ./FRONTEND:/usr/src/app
       - /usr/src/app/node_modules
-    command: ${FRONTEND_COMMAND:-npm run dev}
+    command: ${FRONTEND_COMMAND:-npm run production}
     environment:
       CHOKIDAR_USEPOLLING: "true"
       NEXT_DEV: "true"

@@ -1,6 +1,6 @@
 export const updateEmailTemplate = (
   name: string,
-  changes: string[]
+  changes: string[],
 ): string => {
   return `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f8f9fa; padding: 20px; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 10px;">
@@ -17,7 +17,7 @@ export const updateEmailTemplate = (
               (change) => `
             <li style="background-color: #f8f9fa; margin-bottom: 10px; padding: 10px 15px; border: 1px solid #ddd; border-radius: 6px; color: #2c3e50; font-size: 14px;">
               ${change}
-            </li>`
+            </li>`,
             )
             .join("")}
         </ul>

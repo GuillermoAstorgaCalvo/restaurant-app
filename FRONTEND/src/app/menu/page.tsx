@@ -11,7 +11,7 @@ import { fadeInContainer } from "@/app/animations";
 
 export default function MenuPage() {
   const [groupedMenuItems, setGroupedMenuItems] = useState<GroupedMenuItems>(
-    {}
+    {},
   );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

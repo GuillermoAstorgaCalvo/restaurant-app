@@ -7,14 +7,14 @@ export const createReservationSchema = z.object({
     .max(50, "El nombre no puede exceder los 50 caracteres")
     .regex(
       /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s'-]+$/,
-      "El nombre contiene caracteres no válidos"
+      "El nombre contiene caracteres no válidos",
     ),
   email: z.string().email("Email inválido").toLowerCase(),
   phone: z
     .string()
     .regex(
       /^(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{3,4})$/,
-      "Formato de teléfono inválido. Ejemplo: +34 600 000 000"
+      "Formato de teléfono inválido. Ejemplo: +34 600 000 000",
     ),
   date: z
     .string()
@@ -37,7 +37,7 @@ export const updateReservationSchema = z.object({
     .max(50, "El nombre no puede exceder los 50 caracteres")
     .regex(
       /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s'-]+$/,
-      "El nombre contiene caracteres no válidos"
+      "El nombre contiene caracteres no válidos",
     )
     .optional(),
   email: z.string().email("Email inválido").toLowerCase().optional(),
@@ -45,7 +45,7 @@ export const updateReservationSchema = z.object({
     .string()
     .regex(
       /^(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{3,4})$/,
-      "Formato de teléfono inválido. Ejemplo: +34 600 000 000"
+      "Formato de teléfono inválido. Ejemplo: +34 600 000 000",
     )
     .optional(),
   date: z

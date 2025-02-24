@@ -26,7 +26,7 @@ export const reservationsApi = {
     try {
       const { data } = await api.post<Reservation>(
         "/reservations",
-        reservation
+        reservation,
       );
       return data;
     } catch (error) {

@@ -12,7 +12,7 @@ export async function fetchReservations(): Promise<Reservation[]> {
 
 export async function updateReservationStatus(
   id: number,
-  status: ReservationStatus
+  status: ReservationStatus,
 ): Promise<void> {
   try {
     await api.put(
@@ -23,7 +23,7 @@ export async function updateReservationStatus(
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
   } catch (error) {
     console.error("Error updating reservation status:", error);
@@ -32,12 +32,12 @@ export async function updateReservationStatus(
 }
 
 export const updateReservation = async (
-  updatedReservation: Reservation
+  updatedReservation: Reservation,
 ): Promise<Reservation> => {
   try {
     const { data } = await api.put<Reservation>(
       `/reservations/${updatedReservation.id}`,
-      updatedReservation
+      updatedReservation,
     );
     return data;
   } catch (error) {

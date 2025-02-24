@@ -32,7 +32,7 @@ export async function fetchMenuGroupedByCategory(): Promise<GroupedMenuItems> {
 }
 
 export async function addMenuItem(
-  item: Omit<MenuItem, "id">
+  item: Omit<MenuItem, "id">,
 ): Promise<MenuItem> {
   const response = await api.post<MenuItem>("/menu", item);
   return response.data;
@@ -40,7 +40,7 @@ export async function addMenuItem(
 
 export async function updateMenuItem(
   id: string,
-  item: Omit<MenuItem, "id">
+  item: Omit<MenuItem, "id">,
 ): Promise<MenuItem> {
   const response = await api.put<MenuItem>(`/menu/${id}`, item);
   return response.data;

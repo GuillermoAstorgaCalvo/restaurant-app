@@ -3,7 +3,7 @@ export const confirmationEmailTemplate = (
   email: string,
   phone: string,
   date: string,
-  guests: number
+  guests: number,
 ): string => {
   return `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f8f9fa; padding: 20px; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 10px;">
