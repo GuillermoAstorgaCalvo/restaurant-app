@@ -23,6 +23,7 @@ export * from "./reservation-time";
 export * from "./guests";
 export * from "./peak-hours";
 export * from "./seasonal";
+export * from "./reservation";
 
 interface ValidationResult {
   valid: boolean;
@@ -35,7 +36,7 @@ export async function validateAllBusinessRules(
   email: string,
   phone: string,
   guests: number,
-  name: string
+  name: string,
 ): Promise<ValidationResult> {
   try {
     const validations: ValidationResult[] = [

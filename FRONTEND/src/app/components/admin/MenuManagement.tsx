@@ -34,7 +34,7 @@ export default function AdminMenuManagement() {
 
   const handleEditMenuItem = async (
     id: string,
-    updatedItem: Omit<MenuItem, "id">
+    updatedItem: Omit<MenuItem, "id">,
   ) => {
     await updateMenuItem(id, updatedItem);
     const groupedItems = await fetchMenuGroupedByCategory();

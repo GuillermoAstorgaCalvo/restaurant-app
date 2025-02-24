@@ -30,7 +30,7 @@ const AdminLogin = () => {
       setError(
         err instanceof Error
           ? err.message
-          : "Ocurrió un error inesperado. Inténtalo nuevamente."
+          : "Ocurrió un error inesperado. Inténtalo nuevamente.",
       );
     } finally {
       setLoading(false);

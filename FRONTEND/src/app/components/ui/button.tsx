@@ -24,13 +24,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           size === "sm" && "h-9 px-3 text-sm",
           size === "md" && "h-10 px-4 py-2",
           size === "lg" && "h-11 px-8 text-lg",
-          className
+          className,
         )}
         ref={ref}
         {...props}
       />
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

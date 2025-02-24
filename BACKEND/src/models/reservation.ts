@@ -84,7 +84,7 @@ Reservation.init(
         "pendiente",
         "confirmada",
         "finalizada",
-        "cancelada"
+        "cancelada",
       ),
       allowNull: false,
       defaultValue: "pendiente",
@@ -98,7 +98,7 @@ Reservation.init(
     hooks: {
       // Add any hooks if needed
     },
-  }
+  },
 );
 
 export default Reservation;

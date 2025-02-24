@@ -33,12 +33,14 @@ const ReservationManagement = () => {
 
   const handleStatusUpdate = async (
     id: number,
-    newStatus: ReservationStatus
+    newStatus: ReservationStatus,
   ) => {
     try {
       await updateReservationStatus(id, newStatus);
       setReservations((prev) =>
-        prev.map((res) => (res.id === id ? { ...res, status: newStatus } : res))
+        prev.map((res) =>
+          res.id === id ? { ...res, status: newStatus } : res,
+        ),
       );
     } catch (error) {
       console.error("Error updating status:", error);
@@ -50,8 +52,8 @@ const ReservationManagement = () => {
       await cancelReservation(id);
       setReservations((prev) =>
         prev.map((res) =>
-          res.id === id ? { ...res, status: "cancelada" } : res
-        )
+          res.id === id ? { ...res, status: "cancelada" } : res,
+        ),
       );
     } catch (error) {
       console.error("Error canceling reservation:", error);
@@ -89,7 +91,7 @@ const ReservationManagement = () => {
       const updatedData = await updateReservation(formattedReservation);
 
       setReservations((prev) =>
-        prev.map((res) => (res.id === updatedData.id ? updatedData : res))
+        prev.map((res) => (res.id === updatedData.id ? updatedData : res)),
       );
 
       closeEditForm();
@@ -112,7 +114,7 @@ const ReservationManagement = () => {
   };
 
   const filteredReservations = reservations.filter((res) =>
-    filter ? res.status === filter : true
+    filter ? res.status === filter : true,
   );
 
   return (
@@ -166,7 +168,7 @@ const ReservationManagement = () => {
                   <td className="p-3 text-center">
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusClass(
-                        reservation.status
+                        reservation.status,
                       )}`}
                     >
                       {reservation.status}

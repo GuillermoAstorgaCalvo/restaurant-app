@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import Reservation from "../../models/reservation";
-import { validateAllBusinessRules } from "@/lib/validations";
+import { validateAllBusinessRules } from "@/lib/validations/index";
 import { sendEmail } from "@/lib/utils/emailService";
 import { confirmationEmailTemplate } from "@/lib/utils/emailTemplates/confirmationEmailTemplate";
 
@@ -21,7 +21,7 @@ export const createReservation: RequestHandler = async (req, res) => {
       email.trim(),
       phone.trim(),
       guests,
-      name.trim()
+      name.trim(),
     );
 
     if (!validationResult.valid) {
@@ -45,7 +45,7 @@ export const createReservation: RequestHandler = async (req, res) => {
         email.trim(),
         phone.trim(),
         reservationDate.toLocaleString(),
-        guests
+        guests,
       ),
     });
 

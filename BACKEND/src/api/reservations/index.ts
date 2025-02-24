@@ -10,7 +10,7 @@ import { validate } from "../../middleware/validate";
 import {
   createReservationSchema,
   updateReservationSchema,
-} from "../../lib/validations/reservation";
+} from "@/lib/validations/index";
 
 const reservationRouter = Router();
 
@@ -18,12 +18,12 @@ reservationRouter.get("/", getReservations);
 reservationRouter.post(
   "/",
   validate(createReservationSchema),
-  createReservation
+  createReservation,
 );
 reservationRouter.put(
   "/:id",
   validate(updateReservationSchema),
-  updateReservation
+  updateReservation,
 );
 reservationRouter.put("/status/:id", updateReservationStatus);
 reservationRouter.post("/cancel", cancelReservation);

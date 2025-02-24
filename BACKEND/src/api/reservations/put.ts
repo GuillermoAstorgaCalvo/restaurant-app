@@ -36,7 +36,7 @@ export const updateReservation: RequestHandler = async (req, res) => {
       email?.trim() || reservation.email,
       phone?.trim() || reservation.phone,
       guests || reservation.guests,
-      name?.trim() || reservation.name
+      name?.trim() || reservation.name,
     );
 
     if (!validationResult.valid) {
@@ -138,7 +138,7 @@ export const updateReservationStatus: RequestHandler = async (req, res) => {
     try {
       const emailContent = reservationStatusEmailTemplate(
         name || "Cliente",
-        status
+        status,
       );
       await sendEmail({
         to: email,
