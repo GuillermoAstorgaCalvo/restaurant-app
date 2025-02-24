@@ -1,19 +1,20 @@
-# Usa la última versión LTS de Node.js
+# Use the latest LTS Node.js version
 FROM node:22-slim
 
-# Configura el directorio de trabajo
+# Set the working directory
 WORKDIR /usr/src/app
 
-# Instala las dependencias de backend
+# Copy only package.json and package-lock.json to install dependencies
 COPY package*.json ./
-RUN npm install && npm install -g nodemon
 
-# Copia el código del backend
+# Install dependencies
+RUN npm install --production
+
+# Copy the entire backend code to the container
 COPY . .
 
-# Expone el puerto 3001
+# Expose ports
 EXPOSE 3001
-EXPOSE 9229
 
-# Comando de inicio
+# Start the app in production mode
 CMD ["npm", "run", "production"]
