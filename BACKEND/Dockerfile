@@ -14,7 +14,13 @@ RUN npm install
 COPY . .
 
 # Build the TypeScript code
-RUN npm run build && npm run migrate && npm run seed-admin
+RUN npm run build
+
+# Run database migrations
+RUN npm run migrate
+
+# Seed the admin user
+RUN npm run seed-admin
 
 # Expose ports
 EXPOSE 3001
