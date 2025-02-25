@@ -21,7 +21,12 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test-connection": "ts-node src/scripts/test-connection.ts",
-    "sync": "ts-node src/scripts/sync.ts"
+    "sync": "ts-node src/scripts/sync.ts",
+    "docker:dev": "docker-compose -f ../docker-compose.yml up backend",
+    "docker:build": "docker-compose -f ../docker-compose.yml build backend",
+    "docker:start": "docker-compose -f ../docker-compose.yml up -d backend",
+    "docker:stop": "docker-compose -f ../docker-compose.yml stop backend",
+    "docker:remove": "docker-compose -f ../docker-compose.yml down backend"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
