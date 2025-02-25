@@ -8,10 +8,13 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --production
+RUN npm install
 
 # Copy the entire backend code to the container
 COPY . .
+
+# Build the TypeScript code
+RUN npm run build
 
 # Expose ports
 EXPOSE 3001
