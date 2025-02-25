@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "@/app/components/admin/sidebar";
+import Sidebar from "@/app/components/admin/AdminSidebar";
 import DashboardContainer from "@/app/components/admin/DashboardContainer";
 import ProtectedRoute from "@/app/components/ProtectedRoute";
 import AdminHeader from "@/app/components/admin/AdminHeader";

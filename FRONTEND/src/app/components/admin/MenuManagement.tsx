@@ -9,7 +9,7 @@ import {
   deleteMenuItem,
   GroupedMenuItems,
 } from "@/app/api/menu/menu";
-import { AdminMenuList } from "@/app/components/admin/adminMenuList";
+import { AdminMenuList } from "@/app/components/admin/AdminMenuLists";
 import MenuItemForm from "@/app/components/admin/MenuItemForm";
 
 export default function AdminMenuManagement() {
