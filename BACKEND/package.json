@@ -8,7 +8,7 @@
     "test": "jest --detectOpenHandles",
     "build": "tsc && tsc-alias",
     "production": "node -r tsconfig-paths/register dist/server.js",
-    "migrate": "NODE_OPTIONS='-r ts-node/register' npx sequelize-cli db:migrate",
+    "migrate": "npx sequelize-cli db:migrate",
     "migrate:undo": "NODE_OPTIONS='-r ts-node/register' npx sequelize-cli db:migrate:undo",
     "migrate-docker": "docker exec restaurant-app-backend-1 npm run migrate",
     "migrate-docker:undo": "docker exec restaurant-app-backend-1 npm run migrate:undo",
