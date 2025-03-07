@@ -89,7 +89,6 @@ cd restaurant-app
 
 #### ==============================
 #### 🐳 Root Environment Variables (`/.env`)
-#### (Docker Compose)
 #### ==============================
 ```ini
 NODE_ENV=development
