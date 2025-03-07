@@ -119,10 +119,10 @@ EMAIL_PASSWORD= contact me
 EMAIL_SERVICE=gmail
 ```
 
-# ==============================
-# 🐳 Root Environment Variables (Docker Compose)
-# Path: /.env
-# ==============================
+#### ==============================
+#### 🐳 Root Environment Variables (Docker Compose)
+#### Path: /.env
+#### ==============================
 ```ini
 NODE_ENV=development
 
